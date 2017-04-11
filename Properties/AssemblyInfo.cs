@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ZendeskClient")]
-[assembly: AssemblyDescription("RAM Monitor, by Sergey Stoyan, CliverSoft.com")]
+[assembly: AssemblyDescription("ZendeskClient, by Sergey Stoyan, CliverSoft.com")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CliverSoft.com")]
 [assembly: AssemblyProduct("ZendeskClient")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0a4ef9d5-dfcc-40f0-8aca-6e8b238e4213")]
+[assembly: Guid("0a4ef9d5-dfcc-40f0-8aca-6e8b238e4214")]
 
 // Version information for an assembly consists of the following four values:
 //
