@@ -15,7 +15,7 @@ using System.IO;
 
 namespace Cliver.ZendeskClient
 {
-    public partial class TicketForm : Form
+    public partial class TicketForm : BaseForm// Form// 
     {
         public TicketForm()
         {
@@ -70,7 +70,7 @@ namespace Cliver.ZendeskClient
                 cpu = Environment.ProcessorCount,
                 mem = new Microsoft.VisualBasic.Devices.ComputerInfo().TotalPhysicalMemory,
                 hdd = get_disk_info(),
-                ip = get_local_ip(),
+                ip = get_local_ip().ToString(),
             };
         }
 
@@ -124,10 +124,10 @@ UpW0rk17
                         //description = description.Text,
                         comment = new
                         {
-                            body = description,
+                            body = description + "\r\n\r\n" + SerializationRoutines.Json.Serialize(windows_info),
                             //attachments =
                         },
-                        custom_fields = windows_info,
+                        //custom_fields = windows_info,
                     }
                 };
                 string json_string = SerializationRoutines.Json.Serialize(data);

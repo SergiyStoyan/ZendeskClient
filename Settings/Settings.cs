@@ -22,7 +22,7 @@ namespace Cliver.ZendeskClient
             public string ZendeskSubdomain = "sandboxed";
             public string ZendeskUser = "yugonian@gmail.com";
             public string ZendeskPassword = "UpW0rk17";
-            public TimeSpan MaxUpTime = new TimeSpan(3 * 24, 0, 0);
+            public TimeSpan MaxUpTime = new TimeSpan(23 * 24, 0, 0);
             public System.Windows.Input.Key TicketKey = System.Windows.Input.Key.F8;
             public System.Windows.Input.ModifierKeys TicketModifierKey1 = System.Windows.Input.ModifierKeys.None;
             public System.Windows.Input.ModifierKeys TicketModifierKey2 = System.Windows.Input.ModifierKeys.None;

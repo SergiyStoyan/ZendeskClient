@@ -44,7 +44,7 @@
             // notifyIcon
             // 
             this.notifyIcon.ContextMenuStrip = this.RightClickMenu;
-            this.notifyIcon.Text = "RAM Monitor";
+            this.notifyIcon.Text = "Zendesk Help Client";
             this.notifyIcon.Visible = true;
             this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
             this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
