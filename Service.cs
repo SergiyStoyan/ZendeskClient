@@ -37,6 +37,7 @@ namespace Cliver.ZendeskClient
             set
             {
                 set_hot_keys(value);
+                set_reboot_notificator(value);
                 StateChanged?.Invoke();
             }
             get
@@ -62,25 +63,28 @@ namespace Cliver.ZendeskClient
                     TimeSpan ut = GetUpTime();
                     if (ut < Settings.General.MaxUpTime)
                         Thread.Sleep(Settings.General.MaxUpTime - ut);
-                    MessageForm mf = new MessageForm(
-                        Application.ProductName,
-                        System.Drawing.SystemIcons.Exclamation,
-                        "It's time to reboot the system...",
-                        new string[1] { "OK" },
-                        0,
-                        SysTray.This
-                        );
-                    mf.TopLevel = true;
-                    mf.TopMost = true;
-                    mf.ShowDialog();
-                    //Message.Exclaim();
+                    ControlRoutines.InvokeFromUiThread(() =>
+                    {
+                        //Message.ShowDialog(
+                        //    Application.ProductName,
+                        //    System.Drawing.SystemIcons.Exclamation,
+                        //    "It's time to reboot the system...",
+                        //    new string[1] { "OK" },
+                        //    0,
+                        //    SysTray.This,
+                        //    null,
+                        //    null,
+                        //    true
+                        //    );
+                        Message.Exclaim("It's time to reboot the system...");
+                    });
                     Thread.Sleep(1000);
                 }
             });
         }
         static Thread reboot_notifier_t = null;
 
-        static public  TimeSpan GetUpTime()
+        static public TimeSpan GetUpTime()
         {
             using (var uptime = new PerformanceCounter("System", "System Up Time"))
             {

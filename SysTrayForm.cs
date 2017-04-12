@@ -40,7 +40,7 @@ namespace Cliver.ZendeskClient
 
         private void notifyIcon1_DoubleClick(object sender, EventArgs e)
         {
-            settingsToolStripMenuItem_Click(null, null);
+            newTicketToolStripMenuItem_Click(null, null);
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -80,6 +80,12 @@ namespace Cliver.ZendeskClient
 
         private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
+        }
+
+        private void newTicketToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TicketForm tf = new TicketForm();
+            tf.Show();
         }
     }
 }

@@ -39,6 +39,8 @@ namespace Cliver.ZendeskClient
                 Application.Exit();
             };
 
+            Message.TopMost = true;
+
             Log.Initialize(Log.Mode.ONLY_LOG);
             //Cliver.Config.Initialize(new string[] { "General" });
             Cliver.Config.Reload();

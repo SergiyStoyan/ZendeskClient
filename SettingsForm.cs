@@ -20,16 +20,6 @@ namespace Cliver.ZendeskClient
               {
                   sf = null;
               };
-            
-            //Encoding.DisplayMember = "Text";
-            //Encoding.ValueMember = "CodePage";
-            //List<EncodingItem> its = new List<EncodingItem>();
-            //foreach (EncodingInfo ei in System.Text.Encoding.GetEncodings())
-            //    its.Add(new EncodingItem { Text = ei.Name, CodePage = ei.GetEncoding().CodePage });
-            //Encoding.Items.AddRange(its.ToArray());
-            //EncodingItem si = its.Where(i => i.CodePage == Settings.General.EncodingCodePage).First();
-            //if (si != null)
-            //    Encoding.SelectedIndex = its.IndexOf(si);
 
             foreach (System.Windows.Input.Key k in Enum.GetValues(typeof(System.Windows.Input.Key)))
                 TicketKey.Items.Add(k);
@@ -42,6 +32,8 @@ namespace Cliver.ZendeskClient
             foreach (System.Windows.Input.ModifierKeys k in Enum.GetValues(typeof(System.Windows.Input.ModifierKeys)))
                 TicketModifierKey2.Items.Add(k);
             TicketModifierKey2.SelectedItem = Settings.General.TicketModifierKey2;
+
+            MaxUpTime.Text = ((uint)Settings.General.MaxUpTime.TotalSeconds).ToString();
         }
 
         //public class EncodingItem
@@ -68,15 +60,12 @@ namespace Cliver.ZendeskClient
         {
             try
             {
-                System.Text.RegularExpressions.RegexOptions ros = System.Text.RegularExpressions.RegexOptions.None;
-                if (DumpRegexIgnoreCase.Checked)
-                    ros |= System.Text.RegularExpressions.RegexOptions.IgnoreCase;
-                if (DumpRegexSingleLine.Checked)
-                    ros |= System.Text.RegularExpressions.RegexOptions.Singleline;
-                //Settings.General.EncodingCodePage = ((EncodingItem)Encoding.SelectedItem).CodePage;
                 Settings.General.TicketKey = (System.Windows.Input.Key)TicketKey.SelectedItem;
                 Settings.General.TicketModifierKey1 = (System.Windows.Input.ModifierKeys)TicketModifierKey1.SelectedItem;
                 Settings.General.TicketModifierKey2 = (System.Windows.Input.ModifierKeys)TicketModifierKey2.SelectedItem;
+
+                Settings.General.MaxUpTime = new TimeSpan(0, 0, int.Parse(MaxUpTime.Text));
+
                 Settings.General.Save();
 
                 Close();
