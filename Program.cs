@@ -51,18 +51,6 @@ namespace Cliver.ZendeskClient
             {
                 ProcessRoutines.RunSingleProcessOnly();
 
-                Dictionary<string, string> clps = ProgramRoutines.GetCommandLineParameters();
-                string v;
-                if (clps.TryGetValue("Process", out v))
-                    Settings.General.ProcessName = v;
-                if (clps.TryGetValue("Regex", out v))
-                    Settings.General.DumpRegex = new Regex(v);
-                if (clps.TryGetValue("Url", out v))
-                    Settings.General.EventUrl = v;
-                if (clps.TryGetValue("Period", out v))
-                    Settings.General.CheckPeriodInSecs = uint.Parse(v);
-                //Settings.General.Save();
-
                 Service.Running = true;
 
                 Application.Run(SysTray.This);

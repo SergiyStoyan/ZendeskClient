@@ -18,14 +18,14 @@ namespace Cliver.ZendeskClient
 
         public class GeneralSettings : Cliver.Settings
         {
-            public string ProcessName = "notepad";
-            public Regex DumpRegex = new Regex(@"test", RegexOptions.Singleline);
-            public string EventUrl = "http://localhost/_test/RamMonitorServer.php";
-            public uint CheckPeriodInSecs = 120;
-            public System.Windows.Input.Key TerminatingKey = System.Windows.Input.Key.F1;
-            public System.Windows.Input.ModifierKeys TerminatingModifierKey1 = System.Windows.Input.ModifierKeys.Alt;
-            public System.Windows.Input.ModifierKeys TerminatingModifierKey2 = System.Windows.Input.ModifierKeys.None;
-            //public int EncodingCodePage = 1200;//Unicode
+            public string[] Subjects = new string[] { "test", "test2" };
+            public string ZendeskSubdomain = "sandboxed";
+            public string ZendeskUser = "yugonian@gmail.com";
+            public string ZendeskPassword = "UpW0rk17";
+            public TimeSpan MaxUpTime = new TimeSpan(3 * 24, 0, 0);
+            public System.Windows.Input.Key TicketKey = System.Windows.Input.Key.F8;
+            public System.Windows.Input.ModifierKeys TicketModifierKey1 = System.Windows.Input.ModifierKeys.None;
+            public System.Windows.Input.ModifierKeys TicketModifierKey2 = System.Windows.Input.ModifierKeys.None;
 
             //[Newtonsoft.Json.JsonIgnore]
             //public System.Text.Encoding Encoding = System.Text.Encoding.Unicode;

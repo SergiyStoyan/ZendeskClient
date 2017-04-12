@@ -20,14 +20,7 @@ namespace Cliver.ZendeskClient
               {
                   sf = null;
               };
-
-            ProcessName.Text = Settings.General.ProcessName;
-            DumpRegex.Text = Settings.General.DumpRegex.ToString();
-            DumpRegexIgnoreCase.Checked = Settings.General.DumpRegex.Options.HasFlag(System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-            DumpRegexSingleLine.Checked = Settings.General.DumpRegex.Options.HasFlag(System.Text.RegularExpressions.RegexOptions.Singleline);
-            EventUrl.Text = Settings.General.EventUrl;
-            CheckPeriodInSecs.Text = Settings.General.CheckPeriodInSecs.ToString();
-
+            
             //Encoding.DisplayMember = "Text";
             //Encoding.ValueMember = "CodePage";
             //List<EncodingItem> its = new List<EncodingItem>();
@@ -39,16 +32,16 @@ namespace Cliver.ZendeskClient
             //    Encoding.SelectedIndex = its.IndexOf(si);
 
             foreach (System.Windows.Input.Key k in Enum.GetValues(typeof(System.Windows.Input.Key)))
-                TerminatingKey.Items.Add(k);
-            TerminatingKey.SelectedItem = Settings.General.TerminatingKey;
+                TicketKey.Items.Add(k);
+            TicketKey.SelectedItem = Settings.General.TicketKey;
 
             foreach (System.Windows.Input.ModifierKeys k in Enum.GetValues(typeof(System.Windows.Input.ModifierKeys)))
-                TerminatingModifierKey1.Items.Add(k);
-            TerminatingModifierKey1.SelectedItem = Settings.General.TerminatingModifierKey1;
+                TicketModifierKey1.Items.Add(k);
+            TicketModifierKey1.SelectedItem = Settings.General.TicketModifierKey1;
 
             foreach (System.Windows.Input.ModifierKeys k in Enum.GetValues(typeof(System.Windows.Input.ModifierKeys)))
-                TerminatingModifierKey2.Items.Add(k);
-            TerminatingModifierKey2.SelectedItem = Settings.General.TerminatingModifierKey2;
+                TicketModifierKey2.Items.Add(k);
+            TicketModifierKey2.SelectedItem = Settings.General.TicketModifierKey2;
         }
 
         //public class EncodingItem
@@ -75,19 +68,15 @@ namespace Cliver.ZendeskClient
         {
             try
             {
-                Settings.General.ProcessName = ProcessName.Text;
                 System.Text.RegularExpressions.RegexOptions ros = System.Text.RegularExpressions.RegexOptions.None;
                 if (DumpRegexIgnoreCase.Checked)
                     ros |= System.Text.RegularExpressions.RegexOptions.IgnoreCase;
                 if (DumpRegexSingleLine.Checked)
                     ros |= System.Text.RegularExpressions.RegexOptions.Singleline;
-                Settings.General.DumpRegex = new System.Text.RegularExpressions.Regex(DumpRegex.Text, ros);
-                Settings.General.EventUrl = EventUrl.Text;
-                Settings.General.CheckPeriodInSecs = uint.Parse(CheckPeriodInSecs.Text);
                 //Settings.General.EncodingCodePage = ((EncodingItem)Encoding.SelectedItem).CodePage;
-                Settings.General.TerminatingKey = (System.Windows.Input.Key)TerminatingKey.SelectedItem;
-                Settings.General.TerminatingModifierKey1 = (System.Windows.Input.ModifierKeys)TerminatingModifierKey1.SelectedItem;
-                Settings.General.TerminatingModifierKey2 = (System.Windows.Input.ModifierKeys)TerminatingModifierKey2.SelectedItem;
+                Settings.General.TicketKey = (System.Windows.Input.Key)TicketKey.SelectedItem;
+                Settings.General.TicketModifierKey1 = (System.Windows.Input.ModifierKeys)TicketModifierKey1.SelectedItem;
+                Settings.General.TicketModifierKey2 = (System.Windows.Input.ModifierKeys)TicketModifierKey2.SelectedItem;
                 Settings.General.Save();
 
                 Close();

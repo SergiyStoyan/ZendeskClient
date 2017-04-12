@@ -37,11 +37,11 @@
             this.CheckPeriodInSecs = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.bCancel = new System.Windows.Forms.Button();
-            this.TerminatingKey = new System.Windows.Forms.ComboBox();
+            this.TicketKey = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.TerminatingModifierKey1 = new System.Windows.Forms.ComboBox();
+            this.TicketModifierKey1 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.TerminatingModifierKey2 = new System.Windows.Forms.ComboBox();
+            this.TicketModifierKey2 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.DumpRegexIgnoreCase = new System.Windows.Forms.CheckBox();
@@ -134,15 +134,15 @@
             this.bCancel.UseVisualStyleBackColor = true;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
-            // TerminatingKey
+            // TicketKey
             // 
-            this.TerminatingKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.TicketKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TerminatingKey.FormattingEnabled = true;
-            this.TerminatingKey.Location = new System.Drawing.Point(10, 38);
-            this.TerminatingKey.Name = "TerminatingKey";
-            this.TerminatingKey.Size = new System.Drawing.Size(75, 21);
-            this.TerminatingKey.TabIndex = 11;
+            this.TicketKey.FormattingEnabled = true;
+            this.TicketKey.Location = new System.Drawing.Point(10, 38);
+            this.TicketKey.Name = "TicketKey";
+            this.TicketKey.Size = new System.Drawing.Size(75, 21);
+            this.TicketKey.TabIndex = 11;
             // 
             // label5
             // 
@@ -153,15 +153,15 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Key:";
             // 
-            // TerminatingModifierKey1
+            // TicketModifierKey1
             // 
-            this.TerminatingModifierKey1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.TicketModifierKey1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TerminatingModifierKey1.FormattingEnabled = true;
-            this.TerminatingModifierKey1.Location = new System.Drawing.Point(91, 38);
-            this.TerminatingModifierKey1.Name = "TerminatingModifierKey1";
-            this.TerminatingModifierKey1.Size = new System.Drawing.Size(75, 21);
-            this.TerminatingModifierKey1.TabIndex = 13;
+            this.TicketModifierKey1.FormattingEnabled = true;
+            this.TicketModifierKey1.Location = new System.Drawing.Point(91, 38);
+            this.TicketModifierKey1.Name = "TicketModifierKey1";
+            this.TicketModifierKey1.Size = new System.Drawing.Size(75, 21);
+            this.TicketModifierKey1.TabIndex = 13;
             // 
             // label6
             // 
@@ -172,15 +172,15 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "Modifier Key1:";
             // 
-            // TerminatingModifierKey2
+            // TicketModifierKey2
             // 
-            this.TerminatingModifierKey2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.TicketModifierKey2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TerminatingModifierKey2.FormattingEnabled = true;
-            this.TerminatingModifierKey2.Location = new System.Drawing.Point(173, 38);
-            this.TerminatingModifierKey2.Name = "TerminatingModifierKey2";
-            this.TerminatingModifierKey2.Size = new System.Drawing.Size(75, 21);
-            this.TerminatingModifierKey2.TabIndex = 15;
+            this.TicketModifierKey2.FormattingEnabled = true;
+            this.TicketModifierKey2.Location = new System.Drawing.Point(173, 38);
+            this.TicketModifierKey2.Name = "TicketModifierKey2";
+            this.TicketModifierKey2.Size = new System.Drawing.Size(75, 21);
+            this.TicketModifierKey2.TabIndex = 15;
             // 
             // label7
             // 
@@ -193,10 +193,10 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.TerminatingModifierKey1);
+            this.groupBox1.Controls.Add(this.TicketModifierKey1);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.TerminatingModifierKey2);
-            this.groupBox1.Controls.Add(this.TerminatingKey);
+            this.groupBox1.Controls.Add(this.TicketModifierKey2);
+            this.groupBox1.Controls.Add(this.TicketKey);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Location = new System.Drawing.Point(12, 246);
@@ -275,11 +275,11 @@
         private System.Windows.Forms.TextBox CheckPeriodInSecs;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button bCancel;
-        private System.Windows.Forms.ComboBox TerminatingKey;
+        private System.Windows.Forms.ComboBox TicketKey;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox TerminatingModifierKey1;
+        private System.Windows.Forms.ComboBox TicketModifierKey1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox TerminatingModifierKey2;
+        private System.Windows.Forms.ComboBox TicketModifierKey2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox DumpRegexIgnoreCase;
