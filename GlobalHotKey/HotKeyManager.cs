@@ -111,7 +111,8 @@ namespace GlobalHotKey
 
         ~HotKeyManager()
         {
-            Dispose();
+            if (_registered != null)//finalizer is called even if no instance was created!!!
+                Dispose();
         }
 
         private int getFreeKeyId()
