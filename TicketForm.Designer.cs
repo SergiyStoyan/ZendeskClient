@@ -104,11 +104,11 @@
             // add_attachment
             // 
             this.add_attachment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.add_attachment.Location = new System.Drawing.Point(93, 211);
+            this.add_attachment.Location = new System.Drawing.Point(93, 206);
             this.add_attachment.Name = "add_attachment";
             this.add_attachment.Size = new System.Drawing.Size(40, 23);
             this.add_attachment.TabIndex = 6;
-            this.add_attachment.Text = "Add";
+            this.add_attachment.Text = "+";
             this.add_attachment.UseVisualStyleBackColor = true;
             this.add_attachment.Click += new System.EventHandler(this.add_attachment_Click);
             // 
@@ -127,13 +127,14 @@
             this.attachments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.attachments.AutoScroll = true;
-            this.attachments.Location = new System.Drawing.Point(15, 242);
+            this.attachments.Location = new System.Drawing.Point(15, 230);
             this.attachments.Name = "attachments";
-            this.attachments.Size = new System.Drawing.Size(390, 82);
+            this.attachments.Size = new System.Drawing.Size(390, 94);
             this.attachments.TabIndex = 9;
             // 
             // IncludeScreenshot
             // 
+            this.IncludeScreenshot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.IncludeScreenshot.AutoSize = true;
             this.IncludeScreenshot.Checked = true;
             this.IncludeScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -162,7 +163,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TicketForm";
-            this.Text = "TicketForm";
+            this.Text = "New Ticket";
             this.ResumeLayout(false);
             this.PerformLayout();
 

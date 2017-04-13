@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.delete = new System.Windows.Forms.Button();
-            this.Path = new System.Windows.Forms.TextBox();
+            this.file = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // delete
             // 
             this.delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.delete.Location = new System.Drawing.Point(589, 3);
+            this.delete.Location = new System.Drawing.Point(592, 0);
+            this.delete.Margin = new System.Windows.Forms.Padding(0);
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(25, 23);
             this.delete.TabIndex = 0;
@@ -43,23 +44,26 @@
             this.delete.UseVisualStyleBackColor = true;
             this.delete.Click += new System.EventHandler(this.delete_Click);
             // 
-            // Path
+            // file
             // 
-            this.Path.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.file.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Path.Location = new System.Drawing.Point(4, 4);
-            this.Path.Name = "Path";
-            this.Path.Size = new System.Drawing.Size(579, 20);
-            this.Path.TabIndex = 1;
+            this.file.Location = new System.Drawing.Point(0, 2);
+            this.file.Margin = new System.Windows.Forms.Padding(0);
+            this.file.Name = "file";
+            this.file.ReadOnly = true;
+            this.file.Size = new System.Drawing.Size(592, 20);
+            this.file.TabIndex = 1;
             // 
             // AttachmentControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.Path);
+            this.Controls.Add(this.file);
             this.Controls.Add(this.delete);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "AttachmentControl";
-            this.Size = new System.Drawing.Size(617, 29);
+            this.Size = new System.Drawing.Size(617, 26);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -68,6 +72,6 @@
         #endregion
 
         private System.Windows.Forms.Button delete;
-        public System.Windows.Forms.TextBox Path;
+        private System.Windows.Forms.TextBox file;
     }
 }

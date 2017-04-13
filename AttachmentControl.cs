@@ -12,14 +12,26 @@ namespace Cliver.ZendeskClient
 {
     public partial class AttachmentControl : UserControl
     {
-        public AttachmentControl()
+        public AttachmentControl(string file)
         {
             InitializeComponent();
+
+            this.Dock = DockStyle.Top;
+
+            this.file.Text = file;
+        }
+
+        public string File
+        {
+            get
+            {
+                return file.Text;
+            }
         }
 
         private void delete_Click(object sender, EventArgs e)
         {
-
+            Parent.Controls.Remove(this);
         }
     }
 }
