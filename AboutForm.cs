@@ -21,7 +21,7 @@ namespace Cliver
             this.labelVersion.Text = "Version: " + AssemblyRoutines.GetAppVersion(); //String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
-            this.textBoxDescription.Text = AssemblyDescription + "\r\n\r\nThis app is not intended and must not be used for any malicious activity!";
+            this.textBoxDescription.Text = AssemblyDescription;// + "\r\n\r\nThis app is not intended and must not be used for any malicious activity!";
         }
 
         #region Assembly Attribute Accessors
