@@ -15,7 +15,7 @@ using System.Management;
 
 namespace Cliver.ZendeskClient
 {
-    public partial class TicketForm : BaseForm// Form// 
+    public partial class TicketForm :BaseForm// Form//  
     {
         public TicketForm()
         {
@@ -30,10 +30,22 @@ namespace Cliver.ZendeskClient
             http_client = new HttpClient(handler);
 
             FormClosed += delegate
-              {
-                  http_client.CancelPendingRequests();
-              };
+            {
+                http_client.CancelPendingRequests();
+            };
+
+            FormClosing += TicketForm_FormClosing;
         }
+
+        private void TicketForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (ok.Enabled)
+                return;
+            if (Message.YesNo("Posting the ticket is in progress. Do you want to cancel it?"))
+                http_client.CancelPendingRequests();
+            e.Cancel = true;
+        }
+
         readonly string screenshot_file;
         readonly HttpClient http_client;
 
@@ -74,7 +86,7 @@ namespace Cliver.ZendeskClient
                     files.Add(screenshot_file);
                 foreach (AttachmentControl ac in attachments.Controls)
                     files.Add(ac.File);
-                create_ticket(Environment.UserName, null, subject.Text, description.Text, files);
+                create_ticket(Environment.UserName, Settings.General.UserEmail, subject.Text, description.Text, files);
             }
             catch (Exception ex)
             {
@@ -178,11 +190,9 @@ UpW0rk17
                             email = user_email
                         },
                         subject = subject,
-                        //description = description.Text,
                         comment = new
                         {
                             body = description + "\r\n\r\n--------------\r\n" + SerializationRoutines.Json.Serialize(get_windows_info()),
-                            //attachments =
                             uploads = file_tockens,
                         }
                         //custom_fields = windows_info,
@@ -197,19 +207,19 @@ UpW0rk17
                 //if (rm.Content != null)
                 //    var responseContent = await rm.Content.ReadAsStringAsync();
 
+                ok.Enabled = true;
                 Close();
                 LogMessage.Inform("The ticket was succesfully created.");
             }
+            catch (System.Threading.Tasks.TaskCanceledException e)
+            {
+                Log.Main.Warning(e);
+            }
             catch (Exception e)
             {
-                ok.Enabled = true;
                 LogMessage.Error(e);
             }
-
-            //          curl "https://{subdomain}.zendesk.com/api/v2/uploads.json?filename=myfile.dat&token={optional_token}" \
-            //-v - u { email_address}:{ password} \
-            //-H "Content-Type: application/binary" \
-            //--data - binary @file.dat - X POST
+            ok.Enabled = true;
         }
 
         async private Task<string> upload_file(string file)
@@ -237,6 +247,9 @@ UpW0rk17
             OpenFileDialog d = new OpenFileDialog();
             if (d.ShowDialog() != DialogResult.OK)
                 return;
+            foreach (AttachmentControl c in attachments.Controls)
+                if (c.File == d.FileName)
+                    return;
             AttachmentControl ac = new AttachmentControl(d.FileName);
             attachments.Controls.Add(ac);
         }

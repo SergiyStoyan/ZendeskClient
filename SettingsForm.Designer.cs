@@ -39,13 +39,15 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.MaxUpTime = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.UserEmail = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // bOk
             // 
             this.bOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bOk.Location = new System.Drawing.Point(116, 147);
+            this.bOk.Location = new System.Drawing.Point(116, 194);
             this.bOk.Name = "bOk";
             this.bOk.Size = new System.Drawing.Size(75, 23);
             this.bOk.TabIndex = 0;
@@ -56,7 +58,7 @@
             // bCancel
             // 
             this.bCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bCancel.Location = new System.Drawing.Point(197, 147);
+            this.bCancel.Location = new System.Drawing.Point(197, 194);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(75, 23);
             this.bCancel.TabIndex = 9;
@@ -152,11 +154,29 @@
             this.label4.TabIndex = 18;
             this.label4.Text = "System Max Up Time (secs):";
             // 
+            // UserEmail
+            // 
+            this.UserEmail.Location = new System.Drawing.Point(25, 156);
+            this.UserEmail.Name = "UserEmail";
+            this.UserEmail.Size = new System.Drawing.Size(235, 20);
+            this.UserEmail.TabIndex = 21;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(22, 140);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "User Email:";
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 182);
+            this.ClientSize = new System.Drawing.Size(284, 229);
+            this.Controls.Add(this.UserEmail);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.MaxUpTime);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
@@ -184,5 +204,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox MaxUpTime;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox UserEmail;
+        private System.Windows.Forms.Label label1;
     }
 }

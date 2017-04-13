@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Cliver.ZendeskClient
 {
-    public partial class SettingsForm : BaseForm// Form// 
+    public partial class SettingsForm : BaseForm//Form//  
     {
         public SettingsForm()
         {
@@ -34,6 +34,7 @@ namespace Cliver.ZendeskClient
             TicketModifierKey2.SelectedItem = Settings.General.TicketModifierKey2;
 
             MaxUpTime.Text = ((uint)Settings.General.MaxUpTime.TotalSeconds).ToString();
+            UserEmail.Text = Settings.General.UserEmail;
         }
 
         //public class EncodingItem
@@ -65,6 +66,7 @@ namespace Cliver.ZendeskClient
                 Settings.General.TicketModifierKey2 = (System.Windows.Input.ModifierKeys)TicketModifierKey2.SelectedItem;
 
                 Settings.General.MaxUpTime = new TimeSpan(0, 0, int.Parse(MaxUpTime.Text));
+                Settings.General.UserEmail = string.IsNullOrWhiteSpace(UserEmail.Text) ? null : UserEmail.Text.Trim();
 
                 Settings.General.Save();
 
