@@ -180,6 +180,7 @@ UpW0rk17
                 foreach (string f in files)
                     file_tockens.Add(await upload_file(f));
 
+                var system_info = get_windows_info();
                 var data = new
                 {
                     ticket = new
@@ -192,10 +193,10 @@ UpW0rk17
                         subject = subject,
                         comment = new
                         {
-                            body = description + "\r\n\r\n--------------\r\n" + SerializationRoutines.Json.Serialize(get_windows_info()),
+                            body = description + "\r\n\r\n--------------\r\n" + SerializationRoutines.Json.Serialize(system_info),
                             uploads = file_tockens,
-                        }
-                        //custom_fields = windows_info,
+                        },
+                        //custom_fields = system_info,
                     }
                 };
                 string json_string = SerializationRoutines.Json.Serialize(data);
