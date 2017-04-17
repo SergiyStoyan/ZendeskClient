@@ -15,11 +15,12 @@ using System.Management;
 
 namespace Cliver.ZendeskClient
 {
-    public partial class TicketForm :BaseForm// Form//  
     {
         public TicketForm()
         {
             InitializeComponent();
+
+            //AutoScaleMode = AutoScaleMode.Dpi;
 
             subject.Items.AddRange(Settings.General.Subjects);
 
@@ -42,7 +43,11 @@ namespace Cliver.ZendeskClient
             if (ok.Enabled)
                 return;
             if (Message.YesNo("Posting the ticket is in progress. Do you want to cancel it?"))
+            {
+                //if (create_ticket_t != null && create_ticket_t.IsAlive)
+                //    create_ticket_t.Abort();
                 http_client.CancelPendingRequests();
+            }
             e.Cancel = true;
         }
 
@@ -86,20 +91,24 @@ namespace Cliver.ZendeskClient
                     files.Add(screenshot_file);
                 foreach (AttachmentControl ac in attachments.Controls)
                     files.Add(ac.File);
-                create_ticket(Environment.UserName, Settings.General.UserEmail, subject.Text, description.Text, files);
+                //create_ticket_t = ThreadRoutines.StartTry(() => {
+                    create_ticket(Environment.UserName, Settings.General.UserEmail, subject.Text, description.Text, files);
+                //});
             }
             catch (Exception ex)
             {
                 Message.Exclaim(ex.Message);
             }
         }
+        //System.Threading.Thread create_ticket_t = null;
 
         private dynamic get_windows_info()
         {
             return new
             {
                 hostname = Dns.GetHostName(),
-                currentuser = Environment.UserName,
+                //currentuser = Environment.UserName,
+                currentuser = System.DirectoryServices.AccountManagement.UserPrincipal.Current.Name,
                 os = Environment.OSVersion,
                 os_uptime = Service.GetUpTime(),
                 cpu = get_processor_info(),
@@ -176,11 +185,36 @@ UpW0rk17
             {
                 Log.Main.Inform("Creating ticket.");
 
+                if (string.IsNullOrWhiteSpace(user_email))
+                    user_email = System.DirectoryServices.AccountManagement.UserPrincipal.Current.EmailAddress;
+
                 List<string> file_tockens = new List<string>();
                 foreach (string f in files)
                     file_tockens.Add(await upload_file(f));
 
-                var system_info = get_windows_info();
+                var si = get_windows_info();
+                List<string> ps = new List<string>();
+                foreach (var p in si.cpu)
+                    ps.Add(p.procName);
+                uint hdd_total = 0;
+                uint hdd_free = 0;
+                foreach (var h in si.hdd.Values)
+                {
+                    hdd_total += h.total;
+                    hdd_free += h.free;
+                }
+                string system_info = "url: " + "https://support.bomgar.com/api/client_script?type=rep&operation=generate&action=start_pinned_client_session&search_string=" + si.hostname +
+                    "\r\nhostname: " + si.hostname +
+                    "\r\ncurrentuser: " + si.currentuser +
+                    "\r\nos: " + si.os.VersionString +
+                    "\r\nos uptime: " + si.os_uptime.ToString() +
+                    "\r\ncpu: " + string.Join("\r\ncpu:", ps) +
+                    "\r\nmem: " + si.mem +
+                    "\r\nhdd:" +
+                    "\r\ntotal: " + hdd_total +
+                    "\r\nfree: " + hdd_free +
+                    //hs.Add("total: " + h.total + "\r\nfree: " + h.free); string.Join("\r\nhdd:\r\n", hs) +
+                    "\r\nip: " + si.ip;
                 var data = new
                 {
                     ticket = new
@@ -193,7 +227,7 @@ UpW0rk17
                         subject = subject,
                         comment = new
                         {
-                            body = description + "\r\n\r\n--------------\r\n" + SerializationRoutines.Json.Serialize(system_info),
+                            body = description + "\r\n\r\n--------------\r\n" + system_info,
                             uploads = file_tockens,
                         },
                         //custom_fields = system_info,

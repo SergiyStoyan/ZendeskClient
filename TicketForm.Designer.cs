@@ -46,6 +46,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.subject.FormattingEnabled = true;
             this.subject.Location = new System.Drawing.Point(12, 25);
+            this.subject.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.subject.Name = "subject";
             this.subject.Size = new System.Drawing.Size(393, 21);
             this.subject.TabIndex = 0;
@@ -56,6 +57,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.description.Location = new System.Drawing.Point(12, 65);
+            this.description.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.description.Multiline = true;
             this.description.Name = "description";
             this.description.Size = new System.Drawing.Size(393, 112);
@@ -65,6 +67,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 2;
@@ -74,6 +77,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 49);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 3;
@@ -83,8 +87,9 @@
             // 
             this.cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancel.Location = new System.Drawing.Point(330, 338);
+            this.cancel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cancel.Name = "cancel";
-            this.cancel.Size = new System.Drawing.Size(75, 23);
+            this.cancel.Size = new System.Drawing.Size(74, 23);
             this.cancel.TabIndex = 4;
             this.cancel.Text = "Cancel";
             this.cancel.UseVisualStyleBackColor = true;
@@ -93,9 +98,10 @@
             // ok
             // 
             this.ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ok.Location = new System.Drawing.Point(249, 338);
+            this.ok.Location = new System.Drawing.Point(248, 338);
+            this.ok.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ok.Name = "ok";
-            this.ok.Size = new System.Drawing.Size(75, 23);
+            this.ok.Size = new System.Drawing.Size(74, 23);
             this.ok.TabIndex = 5;
             this.ok.Text = "Send";
             this.ok.UseVisualStyleBackColor = true;
@@ -104,7 +110,8 @@
             // add_attachment
             // 
             this.add_attachment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.add_attachment.Location = new System.Drawing.Point(93, 206);
+            this.add_attachment.Location = new System.Drawing.Point(92, 207);
+            this.add_attachment.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.add_attachment.Name = "add_attachment";
             this.add_attachment.Size = new System.Drawing.Size(40, 23);
             this.add_attachment.TabIndex = 6;
@@ -117,6 +124,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 214);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
             this.label3.TabIndex = 8;
@@ -127,7 +135,8 @@
             this.attachments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.attachments.AutoScroll = true;
-            this.attachments.Location = new System.Drawing.Point(15, 230);
+            this.attachments.Location = new System.Drawing.Point(14, 230);
+            this.attachments.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.attachments.Name = "attachments";
             this.attachments.Size = new System.Drawing.Size(390, 94);
             this.attachments.TabIndex = 9;
@@ -138,7 +147,8 @@
             this.IncludeScreenshot.AutoSize = true;
             this.IncludeScreenshot.Checked = true;
             this.IncludeScreenshot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.IncludeScreenshot.Location = new System.Drawing.Point(15, 183);
+            this.IncludeScreenshot.Location = new System.Drawing.Point(14, 183);
+            this.IncludeScreenshot.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.IncludeScreenshot.Name = "IncludeScreenshot";
             this.IncludeScreenshot.Size = new System.Drawing.Size(118, 17);
             this.IncludeScreenshot.TabIndex = 10;
@@ -147,9 +157,9 @@
             // 
             // TicketForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(417, 372);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(416, 373);
             this.Controls.Add(this.IncludeScreenshot);
             this.Controls.Add(this.attachments);
             this.Controls.Add(this.label3);
@@ -160,6 +170,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.description);
             this.Controls.Add(this.subject);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TicketForm";

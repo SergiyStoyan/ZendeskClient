@@ -31,10 +31,11 @@ namespace Cliver.ZendeskClient
             //[Newtonsoft.Json.JsonIgnore]
             //public System.Text.Encoding Encoding = System.Text.Encoding.Unicode;
 
-            //public override void Loaded()
-            //{
-            //    Encoding = System.Text.Encoding.GetEncoding(EncodingCodePage);
-            //}
+            public override void Loaded()
+            {
+                if (UserEmail == null)
+                    UserEmail = System.DirectoryServices.AccountManagement.UserPrincipal.Current.EmailAddress;
+            }
 
             //public override void Saving()
             //{

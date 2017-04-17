@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Cliver.ZendeskClient
 {
-    public partial class SettingsForm : BaseForm//Form//  
+    public partial class SettingsForm : BaseForm// Form// 
     {
         public SettingsForm()
         {
