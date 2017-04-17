@@ -15,6 +15,7 @@ using System.Management;
 
 namespace Cliver.ZendeskClient
 {
+    public partial class TicketForm : BaseForm// Form//  
     {
         public TicketForm()
         {
