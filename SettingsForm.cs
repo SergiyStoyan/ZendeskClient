@@ -69,6 +69,7 @@ namespace Cliver.ZendeskClient
                 Settings.General.UserEmail = string.IsNullOrWhiteSpace(UserEmail.Text) ? null : UserEmail.Text.Trim();
 
                 Settings.General.Save();
+                Config.Reload();
 
                 Close();
 

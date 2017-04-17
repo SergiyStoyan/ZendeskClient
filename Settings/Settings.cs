@@ -33,8 +33,6 @@ namespace Cliver.ZendeskClient
 
             public override void Loaded()
             {
-                if (UserEmail == null)
-                    UserEmail = System.DirectoryServices.AccountManagement.UserPrincipal.Current.EmailAddress;
             }
 
             //public override void Saving()

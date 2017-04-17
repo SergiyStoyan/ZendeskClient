@@ -108,8 +108,8 @@ namespace Cliver.ZendeskClient
             return new
             {
                 hostname = Dns.GetHostName(),
-                //currentuser = Environment.UserName,
-                currentuser = System.DirectoryServices.AccountManagement.UserPrincipal.Current.Name,
+                currentuser = Environment.UserName,
+                //currentuser = System.DirectoryServices.AccountManagement.UserPrincipal.Current.Name,
                 os = Environment.OSVersion,
                 os_uptime = Service.GetUpTime(),
                 cpu = get_processor_info(),
@@ -176,6 +176,9 @@ yugonian@gmail.com
 UpW0rk17
              */
 
+
+        static string userPrincipalEmail = null;
+
         async private void create_ticket(string user, string user_email, string subject, string description, List<string> files)
         {
             if (!ok.Enabled)
@@ -187,8 +190,17 @@ UpW0rk17
                 Log.Main.Inform("Creating ticket.");
 
                 if (string.IsNullOrWhiteSpace(user_email))
-                    user_email = System.DirectoryServices.AccountManagement.UserPrincipal.Current.EmailAddress;
-
+                {
+                    if (userPrincipalEmail == null)
+                    {//consumes a long time 
+                        userPrincipalEmail = System.DirectoryServices.AccountManagement.UserPrincipal.Current.EmailAddress;
+                        if (userPrincipalEmail == null)
+                            userPrincipalEmail = string.Empty;
+                    }
+                    if (userPrincipalEmail != string.Empty)
+                        user_email = userPrincipalEmail;
+                }
+                
                 List<string> file_tockens = new List<string>();
                 foreach (string f in files)
                     file_tockens.Add(await upload_file(f));
