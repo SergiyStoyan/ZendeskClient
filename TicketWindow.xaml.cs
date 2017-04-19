@@ -24,12 +24,24 @@ namespace Cliver.ZendeskClient
             Icon = AssemblyRoutines.GetAppIconImageSource();
         }
 
-        void add_attachment(object sender, RequestNavigateEventArgs e)
+        void add_attachment(object sender, EventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog d = new Microsoft.Win32.OpenFileDialog();
+            if (d.ShowDialog() != true)
+                return;
+            foreach (AttachmentControl2 c in attachments.Children)
+                if (c.File == d.FileName)
+                    return;
+            AttachmentControl2 ac = new AttachmentControl2(d.FileName);
+            attachments.Children.Add(ac);
+        }
+
+        void submit(object sender, EventArgs e)
         {
 
         }
 
-        void submit(object sender, object e)
+        void include_screenshot(object sender, EventArgs e)
         {
 
         }

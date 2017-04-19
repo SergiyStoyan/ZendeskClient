@@ -128,6 +128,7 @@ namespace Cliver.ZendeskClient
             //TicketForm tf = new TicketForm();
             //tf.Show();
             TicketWindow tw = new TicketWindow();
+            System.Windows.Forms.Integration.ElementHost.EnableModelessKeyboardInterop(tw);
             tw.Show();
         }
     }

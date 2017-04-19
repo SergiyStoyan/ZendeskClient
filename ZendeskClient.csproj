@@ -108,6 +108,9 @@
     <Compile Include="AttachmentControl.Designer.cs">
       <DependentUpon>AttachmentControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="AttachmentControl2.xaml.cs">
+      <DependentUpon>AttachmentControl2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Service.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -183,6 +186,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="AttachmentControl2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TicketWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
