@@ -102,14 +102,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AboutForm.Designer.cs" />
-    <Compile Include="AttachmentControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="AttachmentControl.Designer.cs">
-      <DependentUpon>AttachmentControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AttachmentControl2.xaml.cs">
-      <DependentUpon>AttachmentControl2.xaml</DependentUpon>
+    <Compile Include="AttachmentControl.xaml.cs">
+      <DependentUpon>AttachmentControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Info.cs" />
     <Compile Include="Service.cs" />
@@ -127,12 +121,6 @@
     </Compile>
     <Compile Include="SysTrayForm.designer.cs">
       <DependentUpon>SysTrayForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TicketForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TicketForm.Designer.cs">
-      <DependentUpon>TicketForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TicketWindow.xaml.cs">
       <DependentUpon>TicketWindow.xaml</DependentUpon>
@@ -172,9 +160,6 @@
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AttachmentControl.resx">
-      <DependentUpon>AttachmentControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -182,12 +167,9 @@
       <DependentUpon>SysTrayForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="TicketForm.resx">
-      <DependentUpon>TicketForm.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="AttachmentControl2.xaml">
+    <Page Include="AttachmentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

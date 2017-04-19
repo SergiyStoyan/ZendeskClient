@@ -18,9 +18,9 @@ namespace Cliver.ZendeskClient
     /// <summary>
     /// Interaction logic for AttachmentControl.xaml
     /// </summary>
-    public partial class AttachmentControl2 : UserControl
+    public partial class AttachmentControl : UserControl
     {
-        public AttachmentControl2(string file)
+        public AttachmentControl(string file)
         {
             InitializeComponent();
 

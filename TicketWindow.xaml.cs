@@ -65,7 +65,7 @@ namespace Cliver.ZendeskClient
                 List<string> files = new List<string>();
                 if (include_screenshot.IsChecked == true)
                     files.Add(screenshot_file);
-                foreach (AttachmentControl2 ac in attachments.Children)
+                foreach (AttachmentControl ac in attachments.Children)
                     files.Add(ac.File);
                 //create_ticket_t = ThreadRoutines.StartTry(() => {
                 create_ticket(Environment.UserName, Settings.General.UserEmail, "", description.Text, files);
@@ -197,10 +197,10 @@ UpW0rk17
             Microsoft.Win32.OpenFileDialog d = new Microsoft.Win32.OpenFileDialog();
             if (d.ShowDialog() != true)
                 return;
-            foreach (AttachmentControl2 c in attachments.Children)
+            foreach (AttachmentControl c in attachments.Children)
                 if (c.File == d.FileName)
                     return;
-            AttachmentControl2 ac = new AttachmentControl2(d.FileName);
+            AttachmentControl ac = new AttachmentControl(d.FileName);
             attachments.Children.Add(ac);
         }
     }
