@@ -111,6 +111,7 @@
     <Compile Include="AttachmentControl2.xaml.cs">
       <DependentUpon>AttachmentControl2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Info.cs" />
     <Compile Include="Service.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
