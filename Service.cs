@@ -117,16 +117,18 @@ namespace Cliver.ZendeskClient
                 var hotKey = key_manager.Register(Settings.General.TicketKey, mks);
                 key_manager.KeyPressed += delegate (object sender, KeyPressedEventArgs e)
                 {
-                    create_ticket();
+                    CreateTicket();
                 };
             }
         }
         static HotKeyManager key_manager = null;
 
-        static void create_ticket()
+        static public void CreateTicket()
         {
-            TicketForm tf = new TicketForm();
-            tf.Show();
+            //TicketForm tf = new TicketForm();
+            //tf.Show();
+            TicketWindow tw = new TicketWindow();
+            tw.Show();
         }
     }
 }

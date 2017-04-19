@@ -1,0 +1,41 @@
+﻿<Window x:Class="Cliver.ZendeskClient.TicketWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cliver.ZendeskClient"
+             mc:Ignorable="d" 
+        Title="New Ticket" Height="auto" Width="613" 
+        WindowStyle="SingleBorderWindow" 
+        ResizeMode="CanResize" 
+        Background="Beige" Topmost="False" ShowInTaskbar="True" SizeToContent="Height" 
+        FontFamily="Microsoft Sans Serif" 
+            >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition  />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <Label DockPanel.Dock="Top" FontSize="14pt" HorizontalAlignment="Center" Margin="0,50,0,10" >
+                How can we help you?
+            </Label>
+            <Label DockPanel.Dock="Top" FontSize="10pt" HorizontalAlignment="Center" Margin="0,10,0,10" >
+                Tell us about the problem you're having and which product you're using.
+            </Label>
+        </StackPanel>
+        <TextBox Grid.Row="1"  DockPanel.Dock="Top" FontSize="8.25pt" MinWidth="331" MinHeight="109" Margin="100,10,100,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+                Enter your description
+            </TextBox>
+        <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+            <CheckBox DockPanel.Dock="Bottom" FontSize="8.25pt" HorizontalAlignment="Center" Margin="0,10,0,10">include screenshot</CheckBox>
+            <TextBlock DockPanel.Dock="Bottom" FontSize="8.25pt" HorizontalAlignment="Center" Margin="0,10,0,10">           
+                <Hyperlink RequestNavigate="add_attachment">
+                    Add file
+                </Hyperlink> or drop files here
+            </TextBlock>
+            <Button DockPanel.Dock="Bottom" FontSize="8.25pt" Margin="0,10,0,10" Width="128" Height="49" Click="submit">Submit</Button>
+        </StackPanel>
+    </Grid>
+</Window>

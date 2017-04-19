@@ -84,8 +84,7 @@ namespace Cliver.ZendeskClient
 
         private void newTicketToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TicketForm tf = new TicketForm();
-            tf.Show();
+            Service.CreateTicket();
         }
     }
 }
