@@ -68,7 +68,7 @@ namespace Cliver.ZendeskClient
                 foreach (AttachmentControl ac in attachments.Children)
                     files.Add(ac.File);
                 //create_ticket_t = ThreadRoutines.StartTry(() => {
-                create_ticket(Environment.UserName, Settings.General.UserEmail, "", description.Text, files);
+                create_ticket(Environment.UserName, Settings.General.UserEmail, "Request from support app", description.Text, files);
                 //});
             }
             catch (Exception ex)
