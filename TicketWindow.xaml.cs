@@ -27,7 +27,7 @@ namespace Cliver.ZendeskClient
 
             Icon = AssemblyRoutines.GetAppIconImageSource();
 
-            screenshot_file = Info.GetScreenshotFile();
+            screenshot_file = SystemInfo.GetScreenshotFile();
 
             HttpClientHandler handler = new HttpClientHandler();
             handler.Credentials = new System.Net.NetworkCredential(Settings.General.ZendeskUser, Settings.General.ZendeskPassword);
@@ -112,29 +112,28 @@ UpW0rk17
                 foreach (string f in files)
                     file_tockens.Add(await upload_file(f));
 
-                var si = Info.GetWindowsInfo();
                 List<string> ps = new List<string>();
-                foreach (var p in si.cpu)
+                foreach (SystemInfo.ProcessorInfo p in SystemInfo.GetProcessorInfo())
                     ps.Add(p.procName);
-                uint hdd_total = 0;
-                uint hdd_free = 0;
-                foreach (var h in si.hdd.Values)
+                long hdd_total = 0;
+                long hdd_free = 0;
+                foreach (SystemInfo.DiskInfo h in SystemInfo.GetDiskInfo().Values)
                 {
                     hdd_total += h.total;
                     hdd_free += h.free;
                 }
-                string system_info = "url: " + "https://support.bomgar.com/api/client_script?type=rep&operation=generate&action=start_pinned_client_session&search_string=" + si.hostname +
-                    "\r\nhostname: " + si.hostname +
-                    "\r\ncurrentuser: " + si.currentuser +
-                    "\r\nos: " + si.os.VersionString +
-                    "\r\nos uptime: " + si.os_uptime.ToString() +
-                    "\r\ncpu: " + string.Join("\r\ncpu:", ps) +
-                    "\r\nmem: " + si.mem +
-                    "\r\nhdd:" +
-                    "\r\ntotal: " + hdd_total +
-                    "\r\nfree: " + hdd_free +
+                string hostname = Dns.GetHostName();
+                string system_info = "hostname: <a href='https://support.bomgar.com/api/client_script?type=rep&operation=generate&action=start_pinned_client_session&search_string=" + hostname + "'>" + hostname + "</a>" +
+                    "<br>currentuser: " + Environment.UserName + //System.DirectoryServices.AccountManagement.UserPrincipal.Current.Name
+                    "<br>os: " + SystemInfo.GetWindowsVersion() +
+                    "<br>os uptime: " + SystemInfo.GetUpTime().ToString() +
+                    "<br>cpu: " + string.Join("\r\ncpu:", ps) +
+                    "<br>mem: " + SystemInfo.GetTotalPhysicalMemory() +
+                    "<br>hdd:" +
+                    "<br>total: " + hdd_total +
+                    "<br>free: " + hdd_free +
                     //hs.Add("total: " + h.total + "\r\nfree: " + h.free); string.Join("\r\nhdd:\r\n", hs) +
-                    "\r\nip: " + si.ip;
+                    "<br>ip: " + SystemInfo.GetLocalIp().ToString();
                 var data = new
                 {
                     ticket = new
@@ -147,7 +146,8 @@ UpW0rk17
                         subject = subject,
                         comment = new
                         {
-                            body = description + "\r\n\r\n--------------\r\n" + system_info,
+                            //body = ,
+                            html_body = description + "<br><br>--------------<br>" + system_info,
                             uploads = file_tockens,
                         },
                         //custom_fields = system_info,

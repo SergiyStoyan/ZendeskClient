@@ -60,7 +60,7 @@ namespace Cliver.ZendeskClient
             {
                 while (true)
                 {
-                    TimeSpan ut = GetUpTime();
+                    TimeSpan ut = SystemInfo.GetUpTime();
                     if (ut < Settings.General.MaxUpTime)
                         Thread.Sleep(Settings.General.MaxUpTime - ut);
                     ControlRoutines.InvokeFromUiThread(() =>
@@ -83,16 +83,7 @@ namespace Cliver.ZendeskClient
             });
         }
         static Thread reboot_notifier_t = null;
-
-        static public TimeSpan GetUpTime()
-        {
-            using (var uptime = new PerformanceCounter("System", "System Up Time"))
-            {
-                uptime.NextValue();       //Call this an extra time before reading its value
-                return TimeSpan.FromSeconds(uptime.NextValue());
-            }
-        }
-
+        
         static void set_hot_keys(bool listen)
         {
             if (key_manager != null)
