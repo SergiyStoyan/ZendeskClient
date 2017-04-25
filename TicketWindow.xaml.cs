@@ -16,6 +16,7 @@ using System.Net.Http;
 using System.Net;
 using System.IO;
 using System.Management;
+using System.Threading;
 
 namespace Cliver.ZendeskClient
 {
@@ -33,20 +34,21 @@ namespace Cliver.ZendeskClient
             handler.Credentials = new System.Net.NetworkCredential(Settings.General.ZendeskUser, Settings.General.ZendeskPassword);
             http_client = new HttpClient(handler);
 
-            Closing += delegate(object sender, System.ComponentModel.CancelEventArgs e)
+            Closing += delegate (object sender, System.ComponentModel.CancelEventArgs e)
             {
                 if (ok.IsEnabled)
                     return;
                 if (Message.YesNo("Posting the ticket is in progress. Do you want to cancel it?"))
                 {
-                    //if (create_ticket_t != null && create_ticket_t.IsAlive)
-                    //    create_ticket_t.Abort();
+                    create_ticket_t = null;
                     http_client.CancelPendingRequests();
+                    Log.Main.Inform("Cancelling...");
                 }
                 e.Cancel = true;
             };
 
-            Closed += delegate {
+            Closed += delegate
+            {
                 http_client.CancelPendingRequests();
             };
         }
@@ -60,23 +62,30 @@ namespace Cliver.ZendeskClient
             {
                 //if (string.IsNullOrWhiteSpace(subject.Text))
                 //    throw new Exception("Subject is empty.");
-                if (string.IsNullOrWhiteSpace(description.Text))
+                if (string.IsNullOrWhiteSpace(this.description.Text))
                     throw new Exception("Description is empty.");
                 List<string> files = new List<string>();
-                if (include_screenshot.IsChecked == true)
-                    files.Add(screenshot_file);
+                //if (include_screenshot.IsChecked == true)
+                files.Add(screenshot_file);
                 foreach (AttachmentControl ac in attachments.Children)
                     files.Add(ac.File);
-                //create_ticket_t = ThreadRoutines.StartTry(() => {
-                create_ticket(Environment.UserName, Settings.General.UserEmail, "Request from support app", description.Text, files);
-                //});
+
+                if (!ok.IsEnabled)
+                    return;
+                ok.IsEnabled = false;
+                string description = this.description.Text;
+                create_ticket_t = ThreadRoutines.StartTry(
+                    () => {
+                        create_ticket(Environment.UserName, Settings.General.UserEmail, "Request from support app", description, files);
+                    }
+                );
             }
             catch (Exception ex)
             {
                 Message.Exclaim(ex.Message);
             }
         }
-        //System.Threading.Thread create_ticket_t = null;
+        Thread create_ticket_t = null;
 
         /*
          https://sandboxed.zendesk.com
@@ -86,15 +95,14 @@ UpW0rk17
 
         static string userPrincipalEmail = null;
 
-        async private void create_ticket(string user, string user_email, string subject, string description, List<string> files)
+        async void create_ticket(string user, string user_email, string subject, string description, List<string> files)
         {
-            if (!ok.IsEnabled)
-                return;
-            ok.IsEnabled = false;
-
             try
             {
                 Log.Main.Inform("Creating ticket.");
+
+                if(create_ticket_t == null)
+                    return;
 
                 if (string.IsNullOrWhiteSpace(user_email))
                 {
@@ -108,9 +116,15 @@ UpW0rk17
                         user_email = userPrincipalEmail;
                 }
 
+                if (create_ticket_t == null)
+                    return;
+
                 List<string> file_tockens = new List<string>();
                 foreach (string f in files)
                     file_tockens.Add(await upload_file(f));
+
+                if (create_ticket_t == null)
+                    return;
 
                 List<string> ps = new List<string>();
                 foreach (SystemInfo.ProcessorInfo p in SystemInfo.GetProcessorInfo())
@@ -121,19 +135,48 @@ UpW0rk17
                 {
                     hdd_total += h.total;
                     hdd_free += h.free;
+
+                    if (create_ticket_t == null)
+                        return;
                 }
                 string hostname = Dns.GetHostName();
-                string system_info = "hostname: <a href='https://support.bomgar.com/api/client_script?type=rep&operation=generate&action=start_pinned_client_session&search_string=" + hostname + "'>" + hostname + "</a>" +
-                    "<br>currentuser: " + Environment.UserName + //System.DirectoryServices.AccountManagement.UserPrincipal.Current.Name
-                    "<br>os: " + SystemInfo.GetWindowsVersion() +
-                    "<br>os uptime: " + SystemInfo.GetUpTime().ToString() +
-                    "<br>cpu: " + string.Join("\r\ncpu:", ps) +
-                    "<br>mem: " + SystemInfo.GetTotalPhysicalMemory() +
-                    "<br>hdd:" +
-                    "<br>total: " + hdd_total +
-                    "<br>free: " + hdd_free +
-                    //hs.Add("total: " + h.total + "\r\nfree: " + h.free); string.Join("\r\nhdd:\r\n", hs) +
-                    "<br>ip: " + SystemInfo.GetLocalIp().ToString();
+                List<string> sils = new List<string>();
+                sils.Add("hostname: <a href='https://support.bomgar.com/api/client_script?type=rep&operation=generate&action=start_pinned_client_session&search_string=" + hostname + "'>" + hostname + "</a>");
+
+                if (create_ticket_t == null)
+                    return;
+
+                sils.Add("currentuser: " + Environment.UserName); //System.DirectoryServices.AccountManagement.UserPrincipal.Current.Name
+
+                if (create_ticket_t == null)
+                    return;
+
+                sils.Add("os: " + SystemInfo.GetWindowsVersion());
+
+                if (create_ticket_t == null)
+                    return;
+
+                sils.Add("os uptime: " + SystemInfo.GetUpTime().ToString());
+
+                if (create_ticket_t == null)
+                    return;
+
+                sils.Add("cpu: " + string.Join("\r\ncpu:", ps));
+
+                if (create_ticket_t == null)
+                    return;
+
+                sils.Add("mem: " + SystemInfo.GetTotalPhysicalMemory());
+
+                if (create_ticket_t == null)
+                    return;
+
+                sils.Add("hdd:");
+                sils.Add("total: " + hdd_total);
+                sils.Add("free: " + hdd_free);
+                //sils.Add("total: " + h.total + "\r\nfree: " + h.free); string.Join("\r\nhdd:\r\n", hs) +);
+                sils.Add("ip: " + SystemInfo.GetLocalIp().ToString());
+                string system_info = string.Join("<br>", sils);
                 var data = new
                 {
                     ticket = new
@@ -153,7 +196,15 @@ UpW0rk17
                         //custom_fields = system_info,
                     }
                 };
+
+                if (create_ticket_t == null)
+                    return;
+
                 string json_string = SerializationRoutines.Json.Serialize(data);
+
+                if (create_ticket_t == null)
+                    return;
+
                 Log.Main.Inform("Posting ticket: " + json_string);
                 var post_data = new StringContent(json_string, Encoding.UTF8, "application/json");
                 HttpResponseMessage rm = await http_client.PostAsync("https://" + Settings.General.ZendeskSubdomain + ".zendesk.com/api/v2/tickets.json", post_data);
@@ -162,19 +213,20 @@ UpW0rk17
                 //if (rm.Content != null)
                 //    var responseContent = await rm.Content.ReadAsStringAsync();
 
-                ok.IsEnabled = true;
-                Close();
+                this.Dispatcher.Invoke(() => { Close(); });
                 LogMessage.Inform("The ticket was succesfully created.");
             }
             catch (System.Threading.Tasks.TaskCanceledException e)
             {
+                if (create_ticket_t == null)
+                    return;
                 Log.Main.Warning(e);
             }
             catch (Exception e)
             {
                 LogMessage.Error(e);
             }
-            ok.IsEnabled = true;
+            ok.Dispatcher.Invoke(() => { ok.IsEnabled = true; });
         }
 
         async private Task<string> upload_file(string file)

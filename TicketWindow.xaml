@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cliver.ZendeskClient"
              mc:Ignorable="d" 
-        Title="New Ticket" Height="auto" Width="613" 
+        Title="Get Help" Height="auto" Width="613" 
         WindowStyle="SingleBorderWindow" 
         ResizeMode="CanResize" 
-        Background="Beige" Topmost="False" ShowInTaskbar="True" SizeToContent="Height" 
+        Background="#ffffff" Topmost="False" ShowInTaskbar="True" SizeToContent="Height" 
         FontFamily="Microsoft Sans Serif" 
             >
     <Grid>
@@ -18,7 +18,10 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-            <Label DockPanel.Dock="Top" FontSize="14pt" HorizontalAlignment="Center" Margin="0,50,0,10" >
+            <Label DockPanel.Dock="Top" FontSize="8.25pt" HorizontalAlignment="Stretch" Padding="8" Margin="0,0,0,0" HorizontalContentAlignment="Center" Foreground="#ffffff" Background="#2488ff" >
+                Screenshot captured
+            </Label>
+            <Label DockPanel.Dock="Top" FontSize="14pt" HorizontalAlignment="Center" Margin="0,30,0,10" >
                 How can we help you?
             </Label>
             <Label DockPanel.Dock="Top" FontSize="10pt" HorizontalAlignment="Center" Margin="0,10,0,10" >
@@ -51,7 +54,6 @@
             </TextBox.Style>            
         </TextBox>
         <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
-            <CheckBox IsChecked="True" Name="include_screenshot" DockPanel.Dock="Bottom" FontSize="8.25pt" HorizontalAlignment="Center" Margin="0,10,0,10">include screenshot</CheckBox>
             <TextBlock DockPanel.Dock="Bottom" FontSize="8.25pt" HorizontalAlignment="Center" Margin="0,10,0,10">           
                 <Hyperlink Click="add_attachment">
                     Add file
