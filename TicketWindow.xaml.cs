@@ -101,7 +101,7 @@ UpW0rk17
             {
                 Log.Main.Inform("Creating ticket.");
 
-                if(create_ticket_t == null)
+                if (create_ticket_t == null)
                     return;
 
                 if (string.IsNullOrWhiteSpace(user_email))
@@ -213,7 +213,10 @@ UpW0rk17
                 //if (rm.Content != null)
                 //    var responseContent = await rm.Content.ReadAsStringAsync();
 
-                this.Dispatcher.Invoke(() => { Close(); });
+                this.Dispatcher.Invoke(() => {
+                    ok.IsEnabled = true;
+                    Close();
+                });
                 LogMessage.Inform("The ticket was succesfully created.");
             }
             catch (System.Threading.Tasks.TaskCanceledException e)
@@ -226,7 +229,10 @@ UpW0rk17
             {
                 LogMessage.Error(e);
             }
-            ok.Dispatcher.Invoke(() => { ok.IsEnabled = true; });
+            finally
+            {
+                ok.Dispatcher.Invoke(() => { ok.IsEnabled = true; });
+            }
         }
 
         async private Task<string> upload_file(string file)
