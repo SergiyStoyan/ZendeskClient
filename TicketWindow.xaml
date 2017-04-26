@@ -10,6 +10,7 @@
         ResizeMode="CanResize" 
         Background="#ffffff" Topmost="False" ShowInTaskbar="True" SizeToContent="Height" 
         FontFamily="Microsoft Sans Serif" AllowDrop="True" Drop="Window_Drop"
+        MinHeight="400" MinWidth="500"
             >
     <Grid>
         <Grid.RowDefinitions>
