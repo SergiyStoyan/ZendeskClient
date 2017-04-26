@@ -62,7 +62,21 @@ namespace Cliver.ZendeskClient
                 {
                     TimeSpan ut = SystemInfo.GetUpTime();
                     if (ut < Settings.General.MaxUpTime)
-                        Thread.Sleep(Settings.General.MaxUpTime - ut);
+                    {
+                        TimeSpan ts = Settings.General.MaxUpTime - ut;
+                        try
+                        {
+                            Thread.Sleep(ts);
+                        }
+                        catch
+                        {
+                            TimeSpan ts1 = new TimeSpan(0, 0, 100);
+                            if (ts1 > ts)
+                                throw new Exception("Settings.General.MaxUpTime - SystemInfo.GetUpTime() gave wrong number for timer: " + ts.TotalMilliseconds);
+                            Thread.Sleep(100000);
+                            continue;
+                        }
+                    }
                     ControlRoutines.InvokeFromUiThread(() =>
                     {
                         //Message.ShowDialog(

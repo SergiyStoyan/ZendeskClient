@@ -66,9 +66,9 @@ namespace Cliver.ZendeskClient
                 Settings.General.TicketModifierKey2 = (System.Windows.Input.ModifierKeys)TicketModifierKey2.SelectedItem;
                 int secs = int.Parse(MaxUpTime.Text);
                 if (secs <= 0)
-                    throw new Exception("MaxUpTime must be positive.");
-                if (secs >= Int32.MaxValue)
-                    throw new Exception("MaxUpTime is too big.");
+                    throw new Exception("Max Up Time must be positive.");
+                if (secs > Int32.MaxValue)
+                    throw new Exception("Max Up Time is too big.");
                 Settings.General.MaxUpTime = new TimeSpan(0, 0, secs);
                 Settings.General.UserEmail = string.IsNullOrWhiteSpace(UserEmail.Text) ? null : UserEmail.Text.Trim();
 
