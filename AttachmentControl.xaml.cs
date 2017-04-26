@@ -24,17 +24,12 @@ namespace Cliver.ZendeskClient
         {
             InitializeComponent();
 
-            this.file.Text = file;
+            File = file;
+            this.file.Text = PathRoutines.GetFileNameFromPath(file);
             this.file.CaretIndex = this.file.Text.Length;
         }
 
-        public string File
-        {
-            get
-            {
-                return file.Text;
-            }
-        }
+        public readonly string File;
 
         private void delete(object sender, EventArgs e)
         {

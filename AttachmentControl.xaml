@@ -11,7 +11,7 @@
             <ColumnDefinition />
             <ColumnDefinition Width="23" />
         </Grid.ColumnDefinitions>
-        <TextBox Name="file" Grid.Column="0" HorizontalAlignment="Stretch" Height="auto" VerticalAlignment="Top" IsReadOnly="True">
+        <TextBox Name="file" Grid.Column="0" BorderThickness="0" HorizontalAlignment="Stretch" Height="auto" VerticalAlignment="Top" IsReadOnly="True">
             nldskjfadfgdfgdfgfdfg
         </TextBox>
         <Button Grid.Column="1" Click="delete">X</Button>

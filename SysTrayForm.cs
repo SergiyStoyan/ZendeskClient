@@ -24,17 +24,19 @@ namespace Cliver.ZendeskClient
         {
             InitializeComponent();
 
-            Service.StateChanged += delegate
-            {
-                if (!IsHandleCreated)
-                    CreateHandle();
-                this.Invoke(() => { StartStop.Checked = Service.Running; });
-                if (Service.Running)
-                      notifyIcon.Icon = AssemblyRoutines.GetAppIcon();
-                  else
-                      notifyIcon.Icon = Icon.FromHandle(ImageRoutines.GetGreyScale(AssemblyRoutines.GetAppIcon().ToBitmap()).GetHicon());
-              };
+            //icon = this.Icon.ToBitmap();
+            //Service.StateChanged += delegate
+            //{
+            //    if (!IsHandleCreated)
+            //        CreateHandle();
+            //    this.Invoke(() => { StartStop.Checked = Service.Running; });
+            //    if (Service.Running)
+            //        notifyIcon.Icon = Icon.FromHandle(icon.GetHicon());
+            //    else
+            //        notifyIcon.Icon = Icon.FromHandle(ImageRoutines.GetGreyScale(icon).GetHicon());
+            //};
         }
+        //readonly Bitmap icon;
 
         public static readonly SysTray This = new SysTray();
 
@@ -85,6 +87,6 @@ namespace Cliver.ZendeskClient
         private void newTicketToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Service.CreateTicket();
-        }
+        }        
     }
 }

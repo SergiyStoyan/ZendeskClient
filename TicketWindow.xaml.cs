@@ -75,7 +75,8 @@ namespace Cliver.ZendeskClient
                 ok.IsEnabled = false;
                 string description = this.description.Text;
                 create_ticket_t = ThreadRoutines.StartTry(
-                    () => {
+                    () =>
+                    {
                         create_ticket(Environment.UserName, Settings.General.UserEmail, "Request from support app", description, files);
                     }
                 );
@@ -213,7 +214,8 @@ UpW0rk17
                 //if (rm.Content != null)
                 //    var responseContent = await rm.Content.ReadAsStringAsync();
 
-                this.Dispatcher.Invoke(() => {
+                this.Dispatcher.Invoke(() =>
+                {
                     ok.IsEnabled = true;
                     Close();
                 });
@@ -250,16 +252,32 @@ UpW0rk17
             return (string)(((dynamic)json)["upload"])["token"];
         }
 
-        void add_attachment(object sender, EventArgs e)
+        void add_attachment_clicked(object sender, EventArgs e)
         {
             Microsoft.Win32.OpenFileDialog d = new Microsoft.Win32.OpenFileDialog();
             if (d.ShowDialog() != true)
                 return;
+            add_attachment(d.FileName);
+        }
+
+        void add_attachment(string file)
+        {
             foreach (AttachmentControl c in attachments.Children)
-                if (c.File == d.FileName)
+                if (c.File == file)
+                {
+                    Message.Exclaim("File: " + file + " has already been attached.");
                     return;
-            AttachmentControl ac = new AttachmentControl(d.FileName);
+                }
+            AttachmentControl ac = new AttachmentControl(file);
             attachments.Children.Add(ac);
+        }
+
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+                return;
+            foreach (string file in (string[])e.Data.GetData(DataFormats.FileDrop))
+                add_attachment(file);
         }
     }
 }
