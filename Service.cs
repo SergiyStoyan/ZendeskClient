@@ -46,16 +46,23 @@ namespace Cliver.ZendeskClient
             }
         }
 
+        static ManualResetEvent stop = new ManualResetEvent(false);
+
         static void set_reboot_notificator(bool on)
         {
             if (!on)
             {
                 if (reboot_notifier_t != null && reboot_notifier_t.IsAlive)
-                    reboot_notifier_t.Abort();
+                {
+                    stop.Set();
+                    if(!reboot_notifier_t.Join(1000))
+                        reboot_notifier_t.Abort();
+                }
                 return;
             }
             if (reboot_notifier_t != null && reboot_notifier_t.IsAlive)
                 return;
+            stop.Reset();
             reboot_notifier_t = ThreadRoutines.StartTry(() =>
             {
                 while (true)
@@ -66,14 +73,16 @@ namespace Cliver.ZendeskClient
                         TimeSpan ts = Settings.General.MaxUpTime - ut;
                         try
                         {
-                            Thread.Sleep(ts);
+                            if(stop.WaitOne(ts))
+                                return;
                         }
-                        catch
+                        catch(System.ArgumentOutOfRangeException e)
                         {
                             TimeSpan ts1 = new TimeSpan(0, 0, 100);
                             if (ts1 > ts)
                                 throw new Exception("Settings.General.MaxUpTime - SystemInfo.GetUpTime() gave wrong number for timer: " + ts.TotalMilliseconds);
-                            Thread.Sleep(100000);
+                            if (stop.WaitOne(100000))
+                                return;
                             continue;
                         }
                     }
@@ -92,7 +101,8 @@ namespace Cliver.ZendeskClient
                         //    );
                         Message.Exclaim("It's time to reboot the system...");
                     });
-                    Thread.Sleep(1000);
+                    if (stop.WaitOne(1000))
+                        return;
                 }
             });
         }
