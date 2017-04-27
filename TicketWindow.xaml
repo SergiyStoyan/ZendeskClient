@@ -14,21 +14,80 @@
             >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" >
+        </RowDefinition>
             <RowDefinition  />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-            <Label DockPanel.Dock="Top" FontSize="8.25pt" HorizontalAlignment="Stretch" Padding="8" Margin="0,0,0,0" HorizontalContentAlignment="Center" Foreground="#ffffff" Background="#2488ff" >
-                Screenshot captured
+        <StackPanel Grid.Row="0" DockPanel.Dock="Top" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <Label Name="screenshot_header" MouseLeftButtonDown="show_screenshots" VerticalAlignment="Top" FontSize="8.25pt" HorizontalAlignment="Stretch" Padding="8" Margin="0,0,0,0" HorizontalContentAlignment="Center" Foreground="#ffffff" Background="#2488ff" >
+                Screenshot captured (click to preview)
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0" Storyboard.TargetProperty="Foreground.Color" To="#ffff00" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0" Storyboard.TargetProperty="Foreground.Color" To="#ffffff" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
             </Label>
-            <Label DockPanel.Dock="Top" FontSize="14pt" HorizontalAlignment="Center" Margin="0,30,0,10" >
+            <Label FontSize="14pt" HorizontalAlignment="Center" Margin="0,30,0,10" >
                 How can we help you?
             </Label>
-            <Label DockPanel.Dock="Top" FontSize="10pt" HorizontalAlignment="Center" Margin="0,10,0,10" >
+            <Label FontSize="10pt" HorizontalAlignment="Center" Margin="0,10,0,10" >
                 Tell us about the problem you're having and which product you're using.
             </Label>
         </StackPanel>
+        <Label Name="remove_screenshots" MouseLeftButtonDown="remove_screenshots_click" VerticalAlignment="Top" FontSize="8.25pt" HorizontalAlignment="Right" Padding="8" Margin="0,0,0,0" HorizontalContentAlignment="Right" Foreground="#ffffff" Background="#2488ff" >
+            X
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Setter Property="Visibility" Value="Hidden" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=screenshot_header,Path=IsMouseOver}" Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Foreground.Color" To="#ffffff" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Trigger>
+                        <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Foreground.Color" To="#ff0000" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Foreground.Color" To="#ffffff" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
         <TextBox TextWrapping="Wrap" AcceptsReturn="True" Grid.Row="1" Name="description" DockPanel.Dock="Top" FontSize="8.25pt" MinWidth="331" MinHeight="109" Margin="100,10,100,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
 
             <TextBox.Style>
@@ -60,7 +119,11 @@
                     Add file
                 </Hyperlink> or drop files here
             </TextBlock>
-            <StackPanel Margin="100,10,100,0" Name="attachments" Orientation="Vertical" HorizontalAlignment="Stretch" Width="auto"></StackPanel>
+            <Border  Name="error" BorderThickness="1" BorderBrush="#dd0000" CornerRadius="3"  Visibility="Collapsed" Margin="100,10,100,0" HorizontalAlignment="Stretch" Width="auto">
+                <Label Name="error2"  Foreground="#dd0000">65uhg57</Label>
+            </Border>
+           <StackPanel Margin="100,10,100,0" Name="attachments" Orientation="Vertical" HorizontalAlignment="Stretch" Width="auto">
+            </StackPanel>
             <Button Name="ok" DockPanel.Dock="Bottom" FontSize="8.25pt" Margin="0,10,0,10" Width="128" Height="49" Click="submit">Submit</Button>
         </StackPanel>
     </Grid>

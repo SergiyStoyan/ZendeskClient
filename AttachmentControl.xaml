@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Cliver.ZendeskClient"
              mc:Ignorable="d" 
               >
-    <Grid>
+    <Grid Name="control1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="23" />
@@ -14,6 +14,48 @@
         <TextBox Name="file" Grid.Column="0" BorderThickness="0" HorizontalAlignment="Stretch" Height="auto" VerticalAlignment="Top" IsReadOnly="True">
             nldskjfadfgdfgdfgfdfg
         </TextBox>
-        <Button Grid.Column="1" Click="delete">X</Button>
+        <Label Grid.Column="1" MouseDown="delete" >
+            X
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=control1,Path=MouseEnter}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Foreground.Color" To="#000000" />
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=control1,Path=MouseLeave}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                        <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Foreground.Color" To="#ff0000" />
+                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.3"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Duration="0:0:0.3" Storyboard.TargetProperty="Foreground.Color" To="#000000" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
     </Grid>
 </UserControl>

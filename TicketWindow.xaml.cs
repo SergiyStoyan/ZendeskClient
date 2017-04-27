@@ -28,7 +28,7 @@ namespace Cliver.ZendeskClient
 
             Icon = AssemblyRoutines.GetAppIconImageSource();
 
-            screenshot_file = SystemInfo.GetScreenshotFile();
+            screenshot_files = SystemInfo.GetScreenshotFiles();
 
             HttpClientHandler handler = new HttpClientHandler();
             handler.Credentials = new System.Net.NetworkCredential(Settings.General.ZendeskUser, Settings.General.ZendeskPassword);
@@ -53,7 +53,7 @@ namespace Cliver.ZendeskClient
             };
         }
 
-        readonly string screenshot_file;
+        readonly List<string> screenshot_files;
         readonly HttpClient http_client;
 
         void submit(object sender, EventArgs e)
@@ -66,13 +66,14 @@ namespace Cliver.ZendeskClient
                     throw new Exception("Description is empty.");
                 List<string> files = new List<string>();
                 //if (include_screenshot.IsChecked == true)
-                files.Add(screenshot_file);
+                files.AddRange(screenshot_files);
                 foreach (AttachmentControl ac in attachments.Children)
                     files.Add(ac.File);
 
                 if (!ok.IsEnabled)
                     return;
                 ok.IsEnabled = false;
+                Cursor = Cursors.Wait;
                 string description = this.description.Text;
                 create_ticket_t = ThreadRoutines.StartTry(
                     () =>
@@ -233,7 +234,10 @@ UpW0rk17
             }
             finally
             {
-                ok.Dispatcher.Invoke(() => { ok.IsEnabled = true; });
+                ok.Dispatcher.Invoke(() => {
+                    Cursor = Cursors.Arrow;
+                    ok.IsEnabled = true;
+                });
             }
         }
 
@@ -265,9 +269,20 @@ UpW0rk17
             foreach (AttachmentControl c in attachments.Children)
                 if (c.File == file)
                 {
-                    Message.Exclaim("File: " + file + " has already been attached.");
+                    //Message.Exclaim("File: " + file + " has already been attached.");
+                    error2.Content = "File: " + file + " has already been attached.";
+                    error.Visibility = Visibility.Visible;
                     return;
                 }
+            FileInfo fi = new FileInfo(file);
+            if(fi.Length < 1)
+            {
+                //Message.Exclaim("File: " + file + " is empty.");
+                error2.Content = "File: " + file + " is empty.";
+                error.Visibility = Visibility.Visible;
+                return;
+            }
+            error.Visibility = Visibility.Collapsed;
             AttachmentControl ac = new AttachmentControl(file);
             attachments.Children.Add(ac);
         }
@@ -278,6 +293,33 @@ UpW0rk17
                 return;
             foreach (string file in (string[])e.Data.GetData(DataFormats.FileDrop))
                 add_attachment(file);
+        }
+
+        private void show_screenshots(object sender, EventArgs e)
+        {
+            ThreadRoutines.StartTry(() =>
+            {
+                Cursor c = Cursors.Arrow;
+                Dispatcher.Invoke(() => {
+                    c = Cursor;
+                    Cursor = Cursors.Wait;
+                });
+                Thread.Sleep(1000);
+                Dispatcher.Invoke(() => { Cursor = c; });
+            });
+            
+            foreach (string f in screenshot_files)
+                System.Diagnostics.Process.Start(f);
+        }
+
+        private void remove_screenshots_click(object sender, EventArgs e)
+        {
+            if (!Message.YesNo("Remove screenshots from the ticket?"))
+                return;
+            StackPanel ats = screenshot_header.Parent as StackPanel;
+            ((StackPanel)screenshot_header.Parent).Children.Remove(screenshot_header);
+            ((Grid)remove_screenshots.Parent).Children.Remove(remove_screenshots);
+            screenshot_files.Clear();
         }
     }
 }
