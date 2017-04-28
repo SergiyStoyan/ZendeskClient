@@ -35,7 +35,7 @@
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <Button Background="#256600" Foreground="#ffffff" Name="button" Content="Button" HorizontalAlignment="Stretch" Height="23" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
+            <Button Background="#003020" Foreground="#ffffff" Name="button" Content="Button" HorizontalAlignment="Stretch" Height="23" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -29,7 +29,7 @@ namespace Cliver.ZendeskClient
             public string UserEmail = null;
             public int InfoToastLifeTimeInSecs = 5;
             public string InfoSoundFile = "alert.wav";
-            public int InfoToastBottom = 50;
+            public int InfoToastBottom = 100;
             public int InfoToastRight = 0;
 
             //[Newtonsoft.Json.JsonIgnore]
