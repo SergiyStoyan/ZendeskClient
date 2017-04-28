@@ -96,7 +96,8 @@ namespace Cliver.ZendeskClient
                         next_notification_time = DateTime.Now.AddSeconds(Settings.General.InfoToastLifeTimeInSecs * 2);
                         InfoWindow.Create(ProgramRoutines.GetAppName(), "It's time to reboot the system...", null, "Reboot", ()=> {
                             {
-                                StartShutDown("-f -r -t 5");
+                                System.Diagnostics.Process.Start("shutdown.exe", "-r -t 0");
+                                //StartShutDown("-f -r -t 5");
                             }
                         });
                     }
