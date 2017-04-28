@@ -270,15 +270,15 @@ UpW0rk17
                 if (c.File == file)
                 {
                     //Message.Exclaim("File: " + file + " has already been attached.");
-                    error2.Content = "File: " + file + " has already been attached.";
+                    error2.Content = "File: " + PathRoutines.GetFileNameFromPath(file) + " has already been attached.";
                     error.Visibility = Visibility.Visible;
                     return;
                 }
             FileInfo fi = new FileInfo(file);
-            if(fi.Length < 1)
+            if (fi.Length < 1)
             {
                 //Message.Exclaim("File: " + file + " is empty.");
-                error2.Content = "File: " + file + " is empty.";
+                error2.Content = "File: " + PathRoutines.GetFileNameFromPath(file) + " is empty.";
                 error.Visibility = Visibility.Visible;
                 return;
             }

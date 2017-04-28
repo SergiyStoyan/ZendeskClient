@@ -25,8 +25,8 @@ namespace Cliver.ZendeskClient
             InitializeComponent();
 
             File = file;
-            this.file.Text = PathRoutines.GetFileNameFromPath(file);
-            this.file.CaretIndex = this.file.Text.Length;
+            this.file.Content = PathRoutines.GetFileNameFromPath(file);
+            //this.file.CaretIndex = this.file.Text.Length;
         }
 
         public readonly string File;
