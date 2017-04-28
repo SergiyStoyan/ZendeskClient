@@ -258,6 +258,7 @@ UpW0rk17
 
         void add_attachment_clicked(object sender, EventArgs e)
         {
+            error.Visibility = Visibility.Collapsed;
             Microsoft.Win32.OpenFileDialog d = new Microsoft.Win32.OpenFileDialog();
             if (d.ShowDialog() != true)
                 return;
@@ -289,6 +290,7 @@ UpW0rk17
 
         private void Window_Drop(object sender, DragEventArgs e)
         {
+            error.Visibility = Visibility.Collapsed;
             if (!e.Data.GetDataPresent(DataFormats.FileDrop))
                 return;
             foreach (string file in (string[])e.Data.GetData(DataFormats.FileDrop))

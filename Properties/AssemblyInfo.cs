@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ZendeskClient")]
+[assembly: AssemblyTitle("Zendesk Client")]
 [assembly: AssemblyDescription("ZendeskClient, by Sergey Stoyan, CliverSoft.com")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CliverSoft.com")]
-[assembly: AssemblyProduct("ZendeskClient")]
+[assembly: AssemblyProduct("Zendesk Client")]
 [assembly: AssemblyCopyright("Copyright © 2017 CliverSoft.com")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

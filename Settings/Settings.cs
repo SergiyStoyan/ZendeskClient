@@ -27,6 +27,10 @@ namespace Cliver.ZendeskClient
             public System.Windows.Input.ModifierKeys TicketModifierKey1 = System.Windows.Input.ModifierKeys.None;
             public System.Windows.Input.ModifierKeys TicketModifierKey2 = System.Windows.Input.ModifierKeys.None;
             public string UserEmail = null;
+            public int InfoToastLifeTimeInSecs = 5;
+            public string InfoSoundFile = "alert.wav";
+            public int InfoToastBottom = 50;
+            public int InfoToastRight = 0;
 
             //[Newtonsoft.Json.JsonIgnore]
             //public System.Text.Encoding Encoding = System.Text.Encoding.Unicode;

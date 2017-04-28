@@ -29,6 +29,10 @@ namespace Cliver.ZendeskClient
 {
     public class Service
     {
+        static Service()
+        {
+        }
+
         public delegate void OnStateChanged();
         public static event OnStateChanged StateChanged = null;
 
@@ -55,7 +59,7 @@ namespace Cliver.ZendeskClient
                 if (reboot_notifier_t != null && reboot_notifier_t.IsAlive)
                 {
                     stop.Set();
-                    if(!reboot_notifier_t.Join(1000))
+                    if (!reboot_notifier_t.Join(1000))
                         reboot_notifier_t.Abort();
                 }
                 return;
@@ -65,6 +69,7 @@ namespace Cliver.ZendeskClient
             stop.Reset();
             reboot_notifier_t = ThreadRoutines.StartTry(() =>
             {
+                DateTime next_notification_time = DateTime.MinValue;
                 while (true)
                 {
                     TimeSpan ut = SystemInfo.GetUpTime();
@@ -73,10 +78,10 @@ namespace Cliver.ZendeskClient
                         TimeSpan ts = Settings.General.MaxUpTime - ut;
                         try
                         {
-                            if(stop.WaitOne(ts))
+                            if (stop.WaitOne(ts))
                                 return;
                         }
-                        catch(System.ArgumentOutOfRangeException e)
+                        catch (System.ArgumentOutOfRangeException e)
                         {
                             TimeSpan ts1 = new TimeSpan(0, 0, 100);
                             if (ts1 > ts)
@@ -86,21 +91,15 @@ namespace Cliver.ZendeskClient
                             continue;
                         }
                     }
-                    ControlRoutines.InvokeFromUiThread(() =>
+                    if (next_notification_time < DateTime.Now)
                     {
-                        //Message.ShowDialog(
-                        //    Application.ProductName,
-                        //    System.Drawing.SystemIcons.Exclamation,
-                        //    "It's time to reboot the system...",
-                        //    new string[1] { "OK" },
-                        //    0,
-                        //    SysTray.This,
-                        //    null,
-                        //    null,
-                        //    true
-                        //    );
-                        Message.Exclaim("It's time to reboot the system...");
-                    });
+                        next_notification_time = DateTime.Now.AddSeconds(Settings.General.InfoToastLifeTimeInSecs * 2);
+                        InfoWindow.Create(ProgramRoutines.GetAppName(), "It's time to reboot the system...", null, "Reboot", ()=> {
+                            {
+                                StartShutDown("-f -r -t 5");
+                            }
+                        });
+                    }
                     if (stop.WaitOne(1000))
                         return;
                 }
@@ -108,6 +107,15 @@ namespace Cliver.ZendeskClient
         }
         static Thread reboot_notifier_t = null;
         
+        static void StartShutDown(string param)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = "cmd";
+            psi.WindowStyle = ProcessWindowStyle.Hidden;
+            psi.Arguments = "/C shutdown " + param;
+            Process.Start(psi);
+        }
+
         static void set_hot_keys(bool listen)
         {
             if (key_manager != null)
@@ -140,8 +148,6 @@ namespace Cliver.ZendeskClient
 
         static public void CreateTicket()
         {
-            //TicketForm tf = new TicketForm();
-            //tf.Show();
             TicketWindow tw = new TicketWindow();
             System.Windows.Forms.Integration.ElementHost.EnableModelessKeyboardInterop(tw);
             tw.Show();

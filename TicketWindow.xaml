@@ -139,6 +139,12 @@
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
         </Grid.Triggers>
     </Grid>
 </Window>
