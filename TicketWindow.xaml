@@ -9,10 +9,11 @@
         WindowStyle="SingleBorderWindow" 
         ResizeMode="CanResize" 
         Background="#ffffff" Topmost="False" ShowInTaskbar="True" SizeToContent="Height" 
-        FontFamily="Microsoft Sans Serif" AllowDrop="True" Drop="Window_Drop"
+        FontFamily="Microsoft Sans Serif"
         MinHeight="400" MinWidth="500"
+         AllowDrop="True" Drop="Window_Drop"
             >
-    <Grid>
+    <Grid Background="#ffffff">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" >
         </RowDefinition>
@@ -45,7 +46,6 @@
                 </Label>
                 <Grid.Triggers>
                                 <EventTrigger RoutedEvent="MouseEnter">
-                                    <EventTrigger.Actions>
                                         <BeginStoryboard>
                                             <Storyboard>
                                                 <ColorAnimation Storyboard.TargetName="screenshot_header_label" Duration="0:0:0.3" Storyboard.TargetProperty="Foreground.Color" To="#ffff00" />
@@ -53,17 +53,14 @@
 
                                             </Storyboard>
                                         </BeginStoryboard>
-                                    </EventTrigger.Actions>
                                 </EventTrigger>
                                 <EventTrigger RoutedEvent="MouseLeave">
-                                    <EventTrigger.Actions>
                                         <BeginStoryboard>
                                             <Storyboard>
                                     <ColorAnimation Storyboard.TargetName="screenshot_header_label" Duration="0:0:0.3" Storyboard.TargetProperty="Foreground.Color" To="#ffffff" />
                                     <DoubleAnimation  Storyboard.TargetName="remove_screenshots" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.3"/>
                                 </Storyboard>
                                         </BeginStoryboard>
-                                    </EventTrigger.Actions>
                                 </EventTrigger>
                             </Grid.Triggers>
                 </Grid>
@@ -99,18 +96,49 @@
                 </Style>
             </TextBox.Style>            
         </TextBox>
+
+
         <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+
+            <Border Name="attachment_box" Background="#ffffff" BorderThickness="1" BorderBrush="#aaaaaa" CornerRadius="0" Margin="100,10,100,0" HorizontalAlignment="Stretch" Width="auto">
+                <StackPanel>
             <TextBlock DockPanel.Dock="Bottom" FontSize="8.25pt" HorizontalAlignment="Center" Margin="0,10,0,10">           
                 <Hyperlink Click="add_attachment_clicked">
                     Add file
                 </Hyperlink> or drop files here
-            </TextBlock>
-            <Border  Name="error" BorderThickness="1" BorderBrush="#dd0000" CornerRadius="3"  Visibility="Collapsed" Margin="100,10,100,0" HorizontalAlignment="Stretch" Width="auto">
+                </TextBlock>
+            <Border Name="error" BorderThickness="1" BorderBrush="#dd0000" CornerRadius="3" Visibility="Collapsed" Margin="5,10,5,0" HorizontalAlignment="Stretch" Width="auto">
                 <Label Name="error2"  Foreground="#dd0000">65uhg57</Label>
             </Border>
-           <StackPanel Margin="100,10,100,0" Name="attachments" Orientation="Vertical" HorizontalAlignment="Stretch" Width="auto">
+           <StackPanel Margin="5,10,5,0" Name="attachments" Orientation="Vertical" HorizontalAlignment="Stretch" Width="auto">
             </StackPanel>
+               </StackPanel>
+            </Border>
             <Button Name="ok" DockPanel.Dock="Bottom" FontSize="8.25pt" Margin="0,10,0,10" Width="128" Height="49" Click="submit">Submit</Button>
         </StackPanel>
+
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="DragEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Storyboard.TargetName="attachment_box" Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color" To="#eeeeee" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="DragLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Storyboard.TargetName="attachment_box" Duration="0:0:0" Storyboard.TargetProperty="Background.Color" To="#ffffff" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="Drop">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ColorAnimation Storyboard.TargetName="attachment_box" Duration="0:0:0" Storyboard.TargetProperty="Background.Color" To="#ffffff" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
     </Grid>
 </Window>
