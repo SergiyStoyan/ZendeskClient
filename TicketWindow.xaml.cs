@@ -323,5 +323,51 @@ UpW0rk17
             ((Grid)remove_screenshots.Parent).Children.Remove(remove_screenshots);
             screenshot_files.Clear();
         }
+
+        private void grid_GiveFeedback(object sender, GiveFeedbackEventArgs e)
+        {
+        }
+        Cursor dragging_cursor = null;
+
+        private void Window_DragEnter(object sender, DragEventArgs e)
+        {
+            try
+            {
+        //        if (dragging_cursor == null)
+        //        {
+        //            foreach (string file in (string[])e.Data.GetData(DataFormats.FileDrop))
+        //            {
+        //                System.Drawing.Icon icon = System.Drawing.Icon.ExtractAssociatedIcon(file);
+        //                dragging_cursor = new Cursor((Stream)icon.ToBitmap().GetHicon());
+        //            }
+        //            using (Stream cursorStream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(
+        //"SimplestDragDrop.DDIcon.cur"))
+        //            {
+        //                dragging_cursor = new Cursor(cursorStream);
+        //            }
+        //        }
+        //        Mouse.SetCursor(dragging_cursor);
+
+        //        e.UseDefaultCursors = false;
+        //        e.Handled = true;
+            }
+            finally { }
+
+        }
+
+        //private Cursor BitmapToCursor(Bitmap bmp, int hot_x, int hot_y)
+        //{
+        //    // Initialize the cursor information.
+        //    ICONINFO icon_info = new ICONINFO();
+        //    IntPtr h_icon = bmp.GetHicon();
+        //    GetIconInfo(h_icon, out icon_info);
+        //    icon_info.xHotspot = hot_x;
+        //    icon_info.yHotspot = hot_y;
+        //    icon_info.fIcon = false;    // Cursor, not icon.
+
+        //    // Create the cursor.
+        //    IntPtr h_cursor = CreateIconIndirect(ref icon_info);
+        //    return new Cursor(h_cursor);
+        //}
     }
 }

@@ -11,9 +11,9 @@
         Background="#ffffff" Topmost="False" ShowInTaskbar="True" SizeToContent="Height" 
         FontFamily="Microsoft Sans Serif"
         MinHeight="400" MinWidth="500"
-         AllowDrop="True" Drop="Window_Drop"
+         AllowDrop="True" Drop="Window_Drop" DragDrop.DragEnter="Window_DragEnter"
             >
-    <Grid Background="#ffffff">
+    <Grid Background="#ffffff" DragDrop.GiveFeedback="grid_GiveFeedback">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" >
         </RowDefinition>
@@ -100,7 +100,7 @@
 
         <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
 
-            <Border Name="attachment_box" Background="#ffffff" BorderThickness="1" BorderBrush="#aaaaaa" CornerRadius="0" Margin="100,10,100,0" HorizontalAlignment="Stretch" Width="auto">
+            <Border Name="attachment_box" Background="#ffffff" BorderThickness="1" BorderBrush="#dfdfdf" CornerRadius="0" Margin="100,10,100,0" HorizontalAlignment="Stretch" Width="auto">
                 <StackPanel>
             <TextBlock DockPanel.Dock="Bottom" FontSize="8.25pt" HorizontalAlignment="Center" Margin="0,10,0,10">           
                 <Hyperlink Click="add_attachment_clicked">
