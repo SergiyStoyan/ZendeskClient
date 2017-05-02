@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cliver.ZendeskClient"
              mc:Ignorable="d" d:DesignWidth="500" >
-    <Grid >
+    <Grid>
         <StackPanel>
-            <RichTextBox Height="auto" Background="#ff5536">
+            <RichTextBox Height="auto" Background="#ff5906" BorderThickness="0">
                 <FlowDocument>
                     <Paragraph>
                         <Floater Name="image_container" HorizontalAlignment="Left" Width="60" Margin="0,0,5,0" Padding="0">
@@ -35,7 +35,7 @@
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
-            <Button Background="#003020" Foreground="#ffffff" Name="button" Content="Button" HorizontalAlignment="Stretch" Height="23" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
+            <Button BorderThickness="0" Background="#006080" Foreground="#ffffff" Name="button" Content="Button" HorizontalAlignment="Stretch" Height="23" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
         </StackPanel>
     </Grid>
 </UserControl>

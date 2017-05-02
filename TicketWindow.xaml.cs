@@ -28,7 +28,19 @@ namespace Cliver.ZendeskClient
 
             Icon = AssemblyRoutines.GetAppIconImageSource();
 
-            screenshot_files = SystemInfo.GetScreenshotFiles();
+            //string temp_dir = Path.GetTempPath() + "\\" + ProgramRoutines.GetAppName();
+            //DateTime delete_time = DateTime.Now.AddDays(-3);
+            //foreach (FileInfo fi in (new DirectoryInfo(temp_dir)).GetFiles())
+            //    if (fi.LastWriteTime < delete_time)
+            //        try
+            //        {
+            //            fi.Delete();
+            //        }
+            //        catch { }
+            screenshot_files = SystemInfo.GetScreenshotFiles(
+                PathRoutines.CreateDirectory(Log.WorkDir) + "\\" + Dns.GetHostName() + "_" + Environment.UserName + "_" + DateTime.Now.ToString("yy-MM-dd-HH-mm-ss") + ".png",
+                System.Drawing.Imaging.ImageFormat.Png
+                );
 
             HttpClientHandler handler = new HttpClientHandler();
             handler.Credentials = new System.Net.NetworkCredential(Settings.General.ZendeskUser, Settings.General.ZendeskPassword);
@@ -55,7 +67,7 @@ namespace Cliver.ZendeskClient
 
         readonly List<string> screenshot_files;
         readonly HttpClient http_client;
-
+        
         void submit(object sender, EventArgs e)
         {
             try
