@@ -11,10 +11,10 @@
         Background="#ffffff" Topmost="False" ShowInTaskbar="True" SizeToContent="Height" 
         FontFamily="Microsoft Sans Serif"
         MinHeight="400" MinWidth="500"
-         AllowDrop="True" Drop="Window_Drop" DragDrop.DragEnter="Window_DragEnter"
+         AllowDrop="True" Drop="Window_Drop"
         PreviewMouseDown="Window_UserActivity" PreviewKeyDown="Window_UserActivity"
             >
-    <Grid Background="#ffffff" DragDrop.GiveFeedback="grid_GiveFeedback">
+    <Grid Background="#ffffff">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" >
         </RowDefinition>
