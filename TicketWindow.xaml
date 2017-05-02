@@ -12,6 +12,7 @@
         FontFamily="Microsoft Sans Serif"
         MinHeight="400" MinWidth="500"
          AllowDrop="True" Drop="Window_Drop" DragDrop.DragEnter="Window_DragEnter"
+        PreviewMouseDown="Window_UserActivity" PreviewKeyDown="Window_UserActivity"
             >
     <Grid Background="#ffffff" DragDrop.GiveFeedback="grid_GiveFeedback">
         <Grid.RowDefinitions>
@@ -100,20 +101,24 @@
 
         <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
 
-            <Border Name="attachment_box" Background="#ffffff" BorderThickness="1" BorderBrush="#dfdfdf" CornerRadius="0" Margin="100,10,100,0" HorizontalAlignment="Stretch" Width="auto">
-                <StackPanel>
-            <TextBlock DockPanel.Dock="Bottom" FontSize="8.25pt" HorizontalAlignment="Center" Margin="0,10,0,10">           
+            <Label FontSize="10pt" HorizontalAlignment="Center" Margin="100,10,100,0" Padding="0">Attachements</Label>
+            <Border Name="attachment_box" Background="#ffffff" BorderThickness="1,1,1,1" BorderBrush="#dfdfff" CornerRadius="0" Margin="100,5,100,0" HorizontalAlignment="Stretch" Width="auto">
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image Source="/Resources/clip.png" Height="20" Margin="0,0,10,0" RenderOptions.BitmapScalingMode="HighQuality" ></Image>
+                        <TextBlock DockPanel.Dock="Bottom" FontSize="8.25pt" HorizontalAlignment="Center" Margin="0,10,0,10">
+                
                 <Hyperlink Click="add_attachment_clicked">
                     Add file
                 </Hyperlink> or drop files here
-                </TextBlock>
-            <Border Name="error" BorderThickness="1" BorderBrush="#dd0000" CornerRadius="3" Visibility="Collapsed" Margin="5,10,5,0" HorizontalAlignment="Stretch" Width="auto">
+                        </TextBlock>
+                    </StackPanel>
+            </Border>
+            <Border Name="error" BorderThickness="1" BorderBrush="#dd0000" CornerRadius="3" Visibility="Collapsed"  Margin="100,10,100,0" HorizontalAlignment="Stretch" Width="auto">
                 <Label Name="error2"  Foreground="#dd0000">65uhg57</Label>
             </Border>
-           <StackPanel Margin="0,10,0,0" Name="attachments" Orientation="Vertical" HorizontalAlignment="Stretch" Width="auto">
+            <StackPanel  Margin="100,10,100,0" Name="attachments" Orientation="Vertical" HorizontalAlignment="Stretch" Width="auto">
             </StackPanel>
-               </StackPanel>
-            </Border>
             <Button Name="ok" DockPanel.Dock="Bottom" FontSize="8.25pt" Margin="0,10,0,10" Width="128" Height="49" Click="submit">Submit</Button>
         </StackPanel>
 
@@ -139,11 +144,14 @@
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
-            <EventTrigger RoutedEvent="MouseEnter">
-                <BeginStoryboard>
+            <EventTrigger RoutedEvent="PreviewMouseDown">
+                <!--BeginStoryboard>
                     <Storyboard>
-                    </Storyboard>
-                </BeginStoryboard>
+                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00"                             Storyboard.TargetName="error"                        Storyboard.TargetProperty="(Border.Visibility)">
+                            <DiscreteObjectKeyFrame                             KeyTime="00:00:00"                           Value="{x:Static Visibility.Collapsed}" />
+                        </ObjectAnimationUsingKeyFrames>
+                    </>
+                </-->
             </EventTrigger>
         </Grid.Triggers>
     </Grid>

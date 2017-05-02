@@ -12,7 +12,7 @@
     <AssemblyName>ZendeskClient</AssemblyName>
     <StartupObject>
     </StartupObject>
-    <ApplicationIcon>support-app-logo-blue.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\support-app-logo-blue.ico</ApplicationIcon>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileUpgradeFlags>
@@ -144,8 +144,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="3RINGS~1.ICO" />
-    <Content Include="support-app-logo-blue.ico" />
+    <Content Include="Resources\3RINGS~1.ICO" />
+    <Resource Include="Resources\clip.png" />
+    <Content Include="Resources\support-app-logo-black.ico" />
+    <Content Include="Resources\support-app-logo-blue.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CLIVER\CliverBot\CliverRoutines\CliverRoutines.csproj">

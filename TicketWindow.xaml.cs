@@ -28,6 +28,8 @@ namespace Cliver.ZendeskClient
 
             Icon = AssemblyRoutines.GetAppIconImageSource();
 
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
             //string temp_dir = Path.GetTempPath() + "\\" + ProgramRoutines.GetAppName();
             //DateTime delete_time = DateTime.Now.AddDays(-3);
             //foreach (FileInfo fi in (new DirectoryInfo(temp_dir)).GetFiles())
@@ -365,6 +367,13 @@ UpW0rk17
             }
             finally { }
 
+        }
+
+        private void Window_UserActivity(object sender, EventArgs e)
+        {
+            error.Visibility = Visibility.Collapsed;
+            if (((RoutedEventArgs)e).Source is Button)//if collapse then the event cannot find the target button anymore (weird!)
+                ok.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
         }
 
         //private Cursor BitmapToCursor(Bitmap bmp, int hot_x, int hot_y)
