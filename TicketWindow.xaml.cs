@@ -28,7 +28,7 @@ namespace Cliver.ZendeskClient
 
             Icon = AssemblyRoutines.GetAppIconImageSource();
 
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            //WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             //string temp_dir = Path.GetTempPath() + "\\" + ProgramRoutines.GetAppName();
             //DateTime delete_time = DateTime.Now.AddDays(-3);

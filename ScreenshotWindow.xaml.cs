@@ -24,7 +24,7 @@ namespace Cliver.ZendeskClient
         public ScreenshotWindow(List<string> screenshot_files)
         {
             InitializeComponent();
-
+            
             int i = 0;
             foreach (string f in screenshot_files)
             {
